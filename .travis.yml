@@ -1,0 +1,14 @@
+language: groovy
+
+jdk:
+  - openjdk11
+
+addons:
+  sonarcloud:
+    organization: "thomashan-github"
+
+script:
+  - ./gradlew --scan build sonarqube jacocoTestReport coveralls
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

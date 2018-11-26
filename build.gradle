@@ -18,48 +18,56 @@ sonarqube {
 
 version project.VERSION
 
-allprojects {
-    apply plugin: "groovy"
-    apply plugin: "eclipse"
-    apply plugin: "idea"
-    apply plugin: "jacoco"
+apply plugin: "groovy"
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "jacoco"
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.9
+targetCompatibility = 1.9
+group "thomashan.github.io"
+
+ext {
+    gebVersion = "2.2"
+    seleniumVersion = "3.12.0"
+    groovyBaseVersion = "2.5"
+    groovyFullVersion = "2.5.4"
+}
+
+dependencies {
+    compile("org.codehaus.groovy:groovy-all:${groovyFullVersion}") {
+        exclude(group: "junit")
     }
 
-    sourceCompatibility = 1.9
-    targetCompatibility = 1.9
-    group "thomashan.github.io"
+    compile "org.gebish:geb-spock:${gebVersion}"
+    compile "org.gebish:geb-core:${gebVersion}"
+    compile "org.spockframework:spock-core:1.2-groovy-${groovyBaseVersion}"
+    compile "org.seleniumhq.selenium:selenium-firefox-driver:3.141.59"
+    compile "org.seleniumhq.selenium:selenium-support:3.141.59"
+}
 
-    dependencies {
-        compile("org.codehaus.groovy:groovy-all:2.5.4") {
-            exclude(group: "junit")
-        }
+compileGroovy {
+    groovyOptions.optimizationOptions.indy = true
+}
 
-        testCompile "org.junit.jupiter:junit-jupiter-api:5.3.1"
-        testRuntime "org.junit.jupiter:junit-jupiter-engine:5.3.1"
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
     }
+}
 
-    compileGroovy {
-        groovyOptions.optimizationOptions.indy = true
-    }
-
-    test {
-        useJUnitPlatform()
-    }
-
-    jacocoTestReport {
-        reports {
-            xml.enabled = true // coveralls plugin depends on xml format report
-            html.enabled = true
-        }
-    }
-
-    jacoco {
-        toolVersion = "0.8.2"
-        reportsDir = file("$buildDir/customJacocoReportDir")
-    }
+jacoco {
+    toolVersion = "0.8.2"
+    reportsDir = file("$buildDir/customJacocoReportDir")
 }
 

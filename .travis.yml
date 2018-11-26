@@ -8,6 +8,7 @@ addons:
     organization: "thomashan-github"
 
 script:
+  - xvfb-run make test
   - ./gradlew --scan build sonarqube jacocoTestReport coveralls
 
 after_success:

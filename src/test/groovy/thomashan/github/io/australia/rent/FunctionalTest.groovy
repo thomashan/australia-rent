@@ -2,18 +2,20 @@ package thomashan.github.io.australia.rent
 
 import geb.Browser
 import org.junit.jupiter.api.Test
-import org.openqa.selenium.firefox.FirefoxDriver
+import thomashan.github.io.australia.rent.domain.RentDetailsPage
+import thomashan.github.io.australia.rent.domain.RentListPage
+
 
 class FunctionalTest {
     @Test
     void "test"() {
-        System.setProperty("webdriver.gecko.driver", "download/geckodriver")
-//        println(System.properties.get("webdriver.gecko.driver"))
-//        def browser = new Browser(driver: new FirefoxDriver())
+        System.setProperty("webdriver.gecko.driver", "/Users/thomashan/.gradle/webdriver/geckodriver/0.23.0/geckodriver-v0.23.0-macos.tar/9r5ttm0hwphar5jcjsfet7sl9/geckodriver")
+        println(System.properties.get("webdriver.gecko.driver"))
 
-        Browser.drive{
-            to RentDetailsPage
-            assert price == "\$600 per week"
+        Browser.drive {
+            to RentListPage
+            println(list.size())
+            assert list.size() == 20
         }
     }
 }

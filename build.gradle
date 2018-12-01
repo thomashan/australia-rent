@@ -2,6 +2,7 @@ plugins {
     id "com.gradle.build-scan" version "1.15.2"
     id "org.sonarqube" version "2.6.2"
     id "com.github.kt3k.coveralls" version "2.6.3"
+    id "com.github.erdi.webdriver-binaries" version "2.0"
 }
 
 buildScan {
@@ -34,7 +35,7 @@ group "thomashan.github.io"
 
 ext {
     gebVersion = "2.2"
-    seleniumVersion = "3.12.0"
+    seleniumVersion = "3.141.59"
     groovyBaseVersion = "2.5"
     groovyFullVersion = "2.5.4"
 }
@@ -47,9 +48,15 @@ dependencies {
     compile "org.gebish:geb-spock:${gebVersion}"
     compile "org.gebish:geb-core:${gebVersion}"
     compile "org.spockframework:spock-core:1.2-groovy-${groovyBaseVersion}"
-    compile "org.seleniumhq.selenium:selenium-firefox-driver:3.141.59"
-    compile "org.seleniumhq.selenium:selenium-support:3.141.59"
+    compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
+    compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+    compile "org.seleniumhq.selenium:htmlunit-driver:2.33.3"
 }
+
+webdriverBinaries {
+    geckodriver "0.23.0"
+}
+
 
 compileGroovy {
     groovyOptions.optimizationOptions.indy = true

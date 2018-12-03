@@ -4,7 +4,7 @@ import geb.Module
 
 class RentListSummaryModule extends Module {
     static content = {
-        price { $("p.listing-result__price").text() }
+        price { ($("p.listing-result__price").text() =~ /(\d+\.?\d+)/)[0][0] as BigDecimal }
         addressLine1 { $("span.address-line1").text().strip() - "," }
         suburb { $("span.address-line2 span[itemprop='addressLocality']").text() }
         state { $("span.address-line2 span[itemprop='addressRegion']").text() }

@@ -4,7 +4,7 @@ import groovy.transform.Immutable
 
 @Immutable
 class RentDetails {
-    double price
+    BigDecimal price
     String address
     String suburb
     String state

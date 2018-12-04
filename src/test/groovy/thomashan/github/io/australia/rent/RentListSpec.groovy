@@ -15,9 +15,6 @@ class RentListSpec extends GebSpec {
     def "get the correct information"() {
         when:
         to RentListPage
-        List<RentDetails> rentDetails = list.collect {
-            new RentDetails(price: it.price, address: it.addressLine1, suburb: it.suburb, state: it.state, postcode: it.postcode)
-        }
 
         then:
         rentDetails[0].price == 600

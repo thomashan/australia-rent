@@ -10,6 +10,7 @@ class RentListPage extends Page {
         list {
             $("ul.search-results__results").find("li").hasNot("div.search-results__ads-block").moduleList(RentListSummaryModule)
         }
+        pageNumber { $("a.paginator__page-button.is-current").text() as Integer }
     }
 
     List<RentDetails> getRentDetails() {

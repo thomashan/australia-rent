@@ -4,11 +4,27 @@ import org.junit.jupiter.api.Test
 
 class PriceRegexTests {
     @Test
-    void "price regex"() {
+    void "price is not stated"() {
+        String price = "Contact Agent"
+        def result = getPrice(price)
+
+        assert result.isEmpty()
+    }
+
+    @Test
+    void "price regex 1"() {
+        String price = '$600'
+        def result = getPrice(price)
+
+        assert result.get() == 600
+    }
+
+    @Test
+    void "price regex 2"() {
         String price = '$600 Per Week'
         def result = getPrice(price)
 
-        assert result == 600
+        assert result.get() == 600
     }
 
     @Test
@@ -16,7 +32,7 @@ class PriceRegexTests {
         String price = '$600.15 Per Week'
         def result = getPrice(price)
 
-        assert result == 600.15
+        assert result.get() == 600.15
     }
 
     @Test
@@ -24,7 +40,7 @@ class PriceRegexTests {
         String price = '$600 per week'
         def result = getPrice(price)
 
-        assert result == 600
+        assert result.get() == 600
     }
 
     @Test
@@ -32,7 +48,7 @@ class PriceRegexTests {
         String price = '$600pw'
         def result = getPrice(price)
 
-        assert result == 600
+        assert result.get() == 600
     }
 
     @Test
@@ -40,7 +56,7 @@ class PriceRegexTests {
         String price = '$600pw/$2400pcm'
         def result = getPrice(price)
 
-        assert result == 600
+        assert result.get() == 600
     }
 
     @Test
@@ -48,11 +64,12 @@ class PriceRegexTests {
         String price = '$600 weekly'
         def result = getPrice(price)
 
-        assert result == 600
+        assert result.get() == 600
     }
 
-    private Number getPrice(String price) {
+    private Optional<Number> getPrice(String price) {
         def matcher = price =~ /(\d+\.?\d+)/
-        return matcher[0][0] as BigDecimal
+
+        return matcher.count > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
     }
 }

@@ -12,15 +12,24 @@ class RentListSpec extends GebSpec {
         list.size() == 20
     }
 
-    def "get the correct information"() {
+    def "get the correct page number"() {
         when:
         to RentListPage
 
         then:
-        list[0].price == '$600'
-        list[0].addressLine1 == '48 William Street'
-        list[0].suburb == 'ABBOTSFORD'
-        list[0].state == 'VIC'
-        list[0].postcode == '3067'
+        pageNumber == 1
+    }
+
+    def "get the correct information"() {
+        when:
+        to RentListPage
+        def temp = rentDetails
+
+        then:
+        rentDetails[0].price.get() == 580
+        rentDetails[0].address == "1/41 Clydesdale Road"
+        rentDetails[0].suburb == "AIRPORT WEST"
+        rentDetails[0].state == "VIC"
+        rentDetails[0].postcode == "3042"
     }
 }

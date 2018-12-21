@@ -42,19 +42,13 @@ dependencies {
     compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
     compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
     compile "org.seleniumhq.selenium:htmlunit-driver:2.33.3"
+
+    testCompile "org.junit.jupiter:junit-jupiter-api:5.3.2"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:5.3.2"
 }
 
 webdriverBinaries {
     geckodriver "0.23.0"
-}
-
-
-compileGroovy {
-    groovyOptions.optimizationOptions.indy = true
-}
-
-test {
-    useJUnitPlatform()
 }
 
 jacocoTestReport {

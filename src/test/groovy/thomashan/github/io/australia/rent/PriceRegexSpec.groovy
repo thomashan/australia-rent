@@ -1,70 +1,84 @@
 package thomashan.github.io.australia.rent
 
-import org.junit.jupiter.api.Test
 
-class PriceRegexTests {
-    @Test
-    void "price is not stated"() {
+import spock.lang.Specification
+
+class PriceRegexSpec extends Specification {
+    def "price is not stated"() {
+        when:
         String price = "Contact Agent"
         def result = getPrice(price)
 
-        assert result.isEmpty()
+        then:
+        result.isEmpty()
     }
 
-    @Test
-    void "price regex 1"() {
+    def "price regex 1"() {
+        when:
         String price = '$600'
         def result = getPrice(price)
 
-        assert result.get() == 600
+        then:
+        result.get() == 600
     }
 
-    @Test
-    void "price regex 2"() {
+    def "price regex 2"() {
+        when:
         String price = '$600 Per Week'
         def result = getPrice(price)
 
-        assert result.get() == 600
+        then:
+        result.get() == 600
     }
 
-    @Test
-    void "price regex decimal places"() {
+
+    def "price regex decimal places"() {
+        when:
         String price = '$600.15 Per Week'
         def result = getPrice(price)
 
-        assert result.get() == 600.15
+        then:
+        result.get() == 600.15
     }
 
-    @Test
-    void "price regex case insensitive"() {
+
+    def "price regex case insensitive"() {
+        when:
         String price = '$600 per week'
         def result = getPrice(price)
 
-        assert result.get() == 600
+        then:
+        result.get() == 600
     }
 
-    @Test
-    void "price regex 3"() {
+
+    def "price regex 3"() {
+        when:
         String price = '$600pw'
         def result = getPrice(price)
 
-        assert result.get() == 600
+        then:
+        result.get() == 600
     }
 
-    @Test
-    void "price regex 4"() {
+
+    def "price regex 4"() {
+        when:
         String price = '$600pw/$2400pcm'
         def result = getPrice(price)
 
-        assert result.get() == 600
+        then:
+        result.get() == 600
     }
 
-    @Test
-    void "price regex 5"() {
+
+    def "price regex 5"() {
+        when:
         String price = '$600 weekly'
         def result = getPrice(price)
 
-        assert result.get() == 600
+        then:
+        result.get() == 600
     }
 
     private Optional<Number> getPrice(String price) {

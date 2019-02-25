@@ -28,7 +28,7 @@ ext {
     gebVersion = "2.2"
     seleniumVersion = "3.141.59"
     groovyBaseVersion = "2.5"
-    groovyFullVersion = "2.5.4"
+    groovyFullVersion = "2.5.6"
 }
 
 dependencies {

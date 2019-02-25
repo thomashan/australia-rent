@@ -3,7 +3,7 @@ package thomashan.github.io.australia.rent
 import geb.spock.GebSpec
 import thomashan.github.io.australia.rent.domain.RentListPage
 
-class RentListSpec extends GebSpec {
+class RentListPageSpec extends GebSpec {
     def "list only includes non ad listing"() {
         when:
         to RentListPage
@@ -30,5 +30,21 @@ class RentListSpec extends GebSpec {
         rentDetails[0].suburb == "AIRPORT WEST"
         rentDetails[0].state == "VIC"
         rentDetails[0].postcode == "3042"
+    }
+
+    def "get current page number"() {
+        when:
+        to RentListPage
+
+        then:
+        pageNumber == 1
+    }
+
+    def "get end page number"() {
+        when:
+        to RentListPage
+
+        then:
+        pageEnd == 26
     }
 }

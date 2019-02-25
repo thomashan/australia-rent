@@ -9,3 +9,9 @@ Make sure you have something like this in your test
 ```
 System.setProperty("webdriver.gecko.driver", "${user.home}/.gradle/webdriver/geckodriver/${version}/geckodriver-v${version}-${os}.tar/${random}/geckodriver")
 ```
+
+
+## Running targeted tests
+```bash
+> ./gradlew test --tests *RunSpec*
+```

@@ -11,6 +11,7 @@ class RentListPage extends Page {
             $("ul.search-results__results").find("li").hasNot("div.search-results__ads-block").moduleList(RentListSummaryModule)
         }
         pageNumber { $("a.paginator__page-button.is-current").text() as Integer }
+        pageEnd { $("div.paginator__pages a.paginator__page-button").last().text() as Integer }
     }
 
     List<RentDetails> getRentDetails() {

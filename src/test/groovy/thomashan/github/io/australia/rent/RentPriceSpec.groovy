@@ -9,6 +9,6 @@ class RentPriceSpec extends GebSpec {
         to RentListPage
 
         then:
-        rentDetails[0].price.get() == 580
+        rentDetails[0].price.get() == 590
     }
 }

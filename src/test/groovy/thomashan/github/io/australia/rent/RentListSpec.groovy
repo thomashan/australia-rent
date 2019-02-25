@@ -23,11 +23,10 @@ class RentListSpec extends GebSpec {
     def "get the correct information"() {
         when:
         to RentListPage
-        def temp = rentDetails
 
         then:
-        rentDetails[0].price.get() == 580
-        rentDetails[0].address == "1/41 Clydesdale Road"
+        rentDetails[0].price.get() == 590
+        rentDetails[0].address == "8/19-21 Matthews Avenue"
         rentDetails[0].suburb == "AIRPORT WEST"
         rentDetails[0].state == "VIC"
         rentDetails[0].postcode == "3042"

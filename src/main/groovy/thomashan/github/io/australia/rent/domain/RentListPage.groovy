@@ -2,9 +2,10 @@ package thomashan.github.io.australia.rent.domain
 
 import geb.Page
 import thomashan.github.io.australia.rent.RentDetails
+import thomashan.github.io.australia.rent.SearchQuery
 
 class RentListPage extends Page {
-    static url = "https://www.domain.com.au/rent/melbourne-region-vic/?sort=suburb-asc&bedrooms=3-any&price=550-600&excludedeposittaken=1"
+    static url = "https://www.domain.com.au/rent/melbourne-region-vic/?sort=suburb-asc&excludedeposittaken=1"
 
     static content = {
         list {
@@ -18,5 +19,15 @@ class RentListPage extends Page {
         return list.collect {
             new RentDetails(price: it.price, address: it.addressLine1, suburb: it.suburb, state: it.state, postcode: it.postcode)
         }
+    }
+
+    String convertToPath(SearchQuery searchQuery) {
+        String maxBedrooms = getMaxBedrooms(searchQuery)
+
+        return "&price=${searchQuery.minPrice}-${searchQuery.maxPrice}&bedrooms=${searchQuery.minBedroom}-${maxBedrooms}"
+    }
+
+    String getMaxBedrooms(SearchQuery searchQuery) {
+        return searchQuery.maxBedroom.empty ? "any" : searchQuery.maxBedroom.get().toString()
     }
 }

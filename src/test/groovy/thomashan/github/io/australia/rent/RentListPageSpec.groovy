@@ -3,7 +3,11 @@ package thomashan.github.io.australia.rent
 import geb.spock.GebSpec
 import thomashan.github.io.australia.rent.domain.RentListPage
 
+import static java.util.Optional.empty
+
 class RentListPageSpec extends GebSpec {
+    private SearchQuery searchQuery = new SearchQuery(550, 600, 3, empty())
+
     def "list only includes non ad listing"() {
         when:
         to RentListPage
@@ -22,7 +26,7 @@ class RentListPageSpec extends GebSpec {
 
     def "get the correct information"() {
         when:
-        to RentListPage
+        to RentListPage, searchQuery
 
         then:
         rentDetails[0].price.get() >= 550 && rentDetails[0].price.get() <= 600
@@ -41,9 +45,25 @@ class RentListPageSpec extends GebSpec {
 
     def "get end page number"() {
         when:
-        to RentListPage
+        to RentListPage, searchQuery
 
         then:
         pageEnd == 26
+    }
+
+    def "getMaxBedrooms should return correct any max bedroom value"() {
+        when:
+        def maxBedrooms = new RentListPage().getMaxBedrooms(new SearchQuery(1, 1, 1, Optional.empty()))
+
+        then:
+        maxBedrooms == "any"
+    }
+
+    def "getMaxBedrooms should return correct max bedroom value"() {
+        when:
+        def maxBedrooms = new RentListPage().getMaxBedrooms(new SearchQuery(1, 1, 1, Optional.of(1)))
+
+        then:
+        maxBedrooms == "1"
     }
 }

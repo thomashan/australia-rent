@@ -4,8 +4,8 @@ import groovy.transform.Immutable
 
 @Immutable(knownImmutableClasses = [Optional])
 class SearchQuery {
-    double minPrice
-    double maxPrice
-    double minBedroom
-    Optional<Double> maxBedroom
+    int minPrice
+    int maxPrice
+    int minBedroom
+    Optional<Integer> maxBedroom
 }

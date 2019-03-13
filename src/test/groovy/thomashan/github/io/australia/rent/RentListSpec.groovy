@@ -26,8 +26,7 @@ class RentListSpec extends GebSpec {
         def temp = rentDetails
 
         then:
-        rentDetails[0].price.get() >= 550
-        rentDetails[0].price.get() <= 600
+        rentDetails[0].price.get() >= 550 && rentDetails[0].price.get() <= 600
         rentDetails[0].suburb == "AIRPORT WEST"
         rentDetails[0].state == "VIC"
         rentDetails[0].postcode == "3042"

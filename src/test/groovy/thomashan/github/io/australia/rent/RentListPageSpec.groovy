@@ -44,6 +44,6 @@ class RentListPageSpec extends GebSpec {
         to RentListPage
 
         then:
-        pageEnd == 26
+        pageEnd >= 26
     }
 }

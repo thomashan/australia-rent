@@ -10,7 +10,10 @@ class RentListSummaryModule extends Module {
             Matcher matcher = $("p.listing-result__price").text() =~ /(\d+\.?\d+)/
             matcher.getCount() > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
         }
-        addressLine1 { $("span.address-line1").text().strip() - "," }
+        addressLine1 {
+            String address1 = $("span.address-line1").text()
+            return address1 ? address1?.strip() - "," : ""
+        }
         suburb { $("span.address-line2 span[itemprop='addressLocality']").text() }
         state { $("span.address-line2 span[itemprop='addressRegion']").text() }
         postcode { $("span.address-line2 span[itemprop='postalCode']").text() }

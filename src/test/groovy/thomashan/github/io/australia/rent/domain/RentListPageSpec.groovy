@@ -48,7 +48,7 @@ class RentListPageSpec extends GebSpec {
         to RentListPage, searchQuery
 
         then:
-        pageEnd == 26
+        pageEnd >= 26
     }
 
     def "getMaxBedrooms should return correct any max bedroom value"() {

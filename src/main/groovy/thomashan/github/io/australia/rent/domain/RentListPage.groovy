@@ -9,7 +9,7 @@ class RentListPage extends Page {
 
     static content = {
         list {
-            $("ul.search-results__results").find("li").hasNot("div.search-results__ads-block").moduleList(RentListSummaryModule)
+            $("ul[data-testid='results']").$("li[data-testid]").moduleList(RentListSummaryModule)
         }
         pageNumber { $("a.paginator__page-button.is-current").text() as Integer }
         pageEnd { $("div.paginator__pages a.paginator__page-button").last().text() as Integer }

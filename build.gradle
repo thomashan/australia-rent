@@ -36,18 +36,19 @@ dependencies {
         exclude(group: "junit")
     }
 
-    compile "org.gebish:geb-spock:${gebVersion}"
-    compile "org.gebish:geb-core:${gebVersion}"
-    compile "org.spockframework:spock-core:1.2-groovy-${groovyBaseVersion}"
-    compile "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
-    compile "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
-    compile "org.seleniumhq.selenium:htmlunit-driver:2.33.3"
+    implementation "org.gebish:geb-spock:${gebVersion}"
+    implementation "org.gebish:geb-core:${gebVersion}"
+    implementation "org.spockframework:spock-core:1.2-groovy-${groovyBaseVersion}"
+    implementation "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
+    implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
+    implementation "org.seleniumhq.selenium:htmlunit-driver:2.33.3"
 
-    compile "io.sgr:s2-geometry-library-java:1.0.0"
-    compile "com.xlson.groovycsv:groovycsv:1.3"
+    implementation "io.sgr:s2-geometry-library-java:1.0.0"
+    implementation "com.xlson.groovycsv:groovycsv:1.3"
+    implementation "com.google.maps:google-maps-services:0.9.3"
 
-    testCompile "org.junit.jupiter:junit-jupiter-api:5.3.2"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:5.3.2"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.2"
 }
 
 webdriverBinaries {

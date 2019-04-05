@@ -1,13 +1,8 @@
 package thomashan.github.io.australia.rent.output
 
-
 import spock.lang.Specification
 import thomashan.github.io.australia.rent.LatLongCoordinates
 import thomashan.github.io.australia.rent.RentDetails
-import thomashan.github.io.australia.rent.SearchQuery
-import thomashan.github.io.australia.rent.domain.RentDomainRepository
-
-import static java.util.Optional.empty
 
 class CsvRentDetailsWriterSpec extends Specification {
     private CsvRentDetailsWriter csvRentDetailsWriter = new CsvRentDetailsWriter()
@@ -47,16 +42,5 @@ class CsvRentDetailsWriterSpec extends Specification {
         then:
         file.readLines() == [header, '100,anonAddress,anonSuburb,anonState,anonPostcode,,']
         file.deleteOnExit()
-    }
-
-    def "test"() {
-        given:
-        List<RentDetails> rentDetails = new RentDomainRepository().findAll(new SearchQuery(550, 600, 3, empty()))
-
-        when:
-        File file = csvRentDetailsWriter.file(rentDetails)
-
-        then:
-        file.readLines() == [header, '100,anonAddress,anonSuburb,anonState,anonPostcode,,']
     }
 }

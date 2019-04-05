@@ -1,6 +1,7 @@
 package thomashan.github.io.australia.rent.domain
 
 import geb.spock.GebSpec
+import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.SearchQuery
 
 import static java.util.Optional.empty
@@ -28,9 +29,10 @@ class RentListSpec extends GebSpec {
         def temp = rentDetails
 
         then:
-        rentDetails[0].price.get() >= 550 && rentDetails[0].price.get() <= 600
-        rentDetails[0].suburb == "AIRPORT WEST"
-        rentDetails[0].state == "VIC"
-        rentDetails[0].postcode == "3042"
+        RentDetails rentDetails = rentDetails[0]
+        rentDetails.price.get() >= 550 && rentDetails.price.get() <= 600
+        rentDetails.suburb.startsWith("A")
+        rentDetails.state == "VIC"
+        rentDetails.postcode.startsWith("3")
     }
 }

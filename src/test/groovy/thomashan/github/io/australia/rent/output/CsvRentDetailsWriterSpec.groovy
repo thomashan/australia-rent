@@ -10,7 +10,7 @@ class CsvRentDetailsWriterSpec extends Specification {
 
     def "should generate csv file header"() {
         given:
-        Set<RentDetails> rentDetails = []
+        List<RentDetails> rentDetails = []
 
         when:
         File file = csvRentDetailsWriter.file(rentDetails)
@@ -22,7 +22,7 @@ class CsvRentDetailsWriterSpec extends Specification {
 
     def "should generate csv body with no price"() {
         given:
-        Set<RentDetails> rentDetails = [new RentDetails(Optional.empty(), "anonAddress", "anonSuburb", "anonState", "anonPostcode", Optional.of(new LatLongCoordinates(0, 0)))]
+        List<RentDetails> rentDetails = [new RentDetails(Optional.empty(), "anonAddress", "anonSuburb", "anonState", "anonPostcode", Optional.of(new LatLongCoordinates(0, 0)))]
 
         when:
         File file = csvRentDetailsWriter.file(rentDetails)
@@ -34,7 +34,7 @@ class CsvRentDetailsWriterSpec extends Specification {
 
     def "should generate csv body with empty latitude, longitude"() {
         given:
-        Set<RentDetails> rentDetails = [new RentDetails(Optional.of(100), "anonAddress", "anonSuburb", "anonState", "anonPostcode", Optional.empty())]
+        List<RentDetails> rentDetails = [new RentDetails(Optional.of(100), "anonAddress", "anonSuburb", "anonState", "anonPostcode", Optional.empty())]
 
         when:
         File file = csvRentDetailsWriter.file(rentDetails)

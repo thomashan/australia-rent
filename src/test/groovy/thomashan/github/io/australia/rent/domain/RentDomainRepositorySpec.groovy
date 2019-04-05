@@ -10,9 +10,6 @@ class RentDomainRepositorySpec extends Specification {
     private RentDomainRepository rentDomainRepository = new RentDomainRepository()
 
     def "get all listing"() {
-        given:
-        System.setProperty("webdriver.gecko.driver", "/Users/thomashan/.gradle/webdriver/geckodriver/0.23.0/geckodriver-v0.23.0-macos.tar/9r5ttm0hwphar5jcjsfet7sl9/geckodriver")
-
         when:
         List<RentDetails> rentDetails = rentDomainRepository.findAll(new SearchQuery(550, 600, 3, empty()))
 

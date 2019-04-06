@@ -1,9 +1,10 @@
 package thomashan.github.io.australia.rent
 
-
+import groovy.transform.EqualsAndHashCode
 import groovy.transform.Immutable
 
 @Immutable(knownImmutableClasses = [Optional], copyWith = true)
+@EqualsAndHashCode(excludes = ["coordinates"])
 class RentDetails {
     Optional<BigDecimal> price
     String address

@@ -46,6 +46,8 @@ dependencies {
     implementation "io.sgr:s2-geometry-library-java:1.0.0"
     implementation "com.xlson.groovycsv:groovycsv:1.3"
     implementation "com.google.maps:google-maps-services:0.9.3"
+    implementation "com.google.api-client:google-api-client:1.28.0"
+    implementation "com.dropbox.core:dropbox-core-sdk:3.0.11"
 
     testRuntime "org.junit.jupiter:junit-jupiter-engine:5.3.2"
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.3.2"

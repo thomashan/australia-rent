@@ -1,11 +1,11 @@
 package thomashan.github.io.australia.rent.domain
 
-import geb.spock.GebSpec
+import geb.spock.GebReportingSpec
 import thomashan.github.io.australia.rent.SearchQuery
 
 import static java.util.Optional.empty
 
-class RentPriceSpec extends GebSpec {
+class RentPriceSpec extends GebReportingSpec {
     def "get the domain.com.au rent price"() {
         when:
         to RentListPage, new SearchQuery(550, 600, 3, empty())

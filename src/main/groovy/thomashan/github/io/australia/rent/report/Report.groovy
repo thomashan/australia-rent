@@ -2,11 +2,7 @@ package thomashan.github.io.australia.rent.report
 
 import thomashan.github.io.australia.rent.RentDetails
 
-import java.time.Instant
-
 class Report {
-    Instant start
-    Instant end
     List<RentDetails> rentDetails
 
     List<RentDetails> oldRentDetails(Report report) {

@@ -5,8 +5,12 @@ import thomashan.github.io.australia.rent.RentDetails
 class Report {
     List<RentDetails> rentDetails
 
+    Report(List<RentDetails> rentDetails) {
+        this.rentDetails = rentDetails
+    }
+
     List<RentDetails> oldRentDetails(Report report) {
-        return rentDetails - report.rentDetails
+        return report.rentDetails - rentDetails
     }
 
     List<RentDetails> commonRentDetails(Report report) {
@@ -14,6 +18,6 @@ class Report {
     }
 
     List<RentDetails> newRentDetails(Report report) {
-        return report.rentDetails - rentDetails
+        return rentDetails - report.rentDetails
     }
 }

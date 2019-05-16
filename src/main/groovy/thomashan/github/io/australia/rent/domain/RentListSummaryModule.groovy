@@ -17,5 +17,7 @@ class RentListSummaryModule extends Module {
         suburb { $("span.address-line2 span[itemprop='addressLocality']").text() }
         state { $("span.address-line2 span[itemprop='addressRegion']").text() }
         postcode { $("span.address-line2 span[itemprop='postalCode']").text() }
+
+        addressLine2 { $("span.address-line2").text() }
     }
 }

@@ -34,23 +34,23 @@ class ReportSpec extends Specification {
 
     def "commonRentDetails should return correct common rent details"() {
         when:
-        List<RentDetails> oldRentDetails = report2.commonRentDetails(report1)
+        List<RentDetails> commonRentDetails = report2.commonRentDetails(report1)
 
         then:
-        !oldRentDetails.contains(rentDetails1)
-        oldRentDetails.contains(rentDetails2)
-        oldRentDetails.contains(rentDetails3)
-        !oldRentDetails.contains(rentDetails4)
+        !commonRentDetails.contains(rentDetails1)
+        commonRentDetails.contains(rentDetails2)
+        commonRentDetails.contains(rentDetails3)
+        !commonRentDetails.contains(rentDetails4)
     }
 
     def "newRentDetails should return correct new rent details"() {
         when:
-        List<RentDetails> oldRentDetails = report2.newRentDetails(report1)
+        List<RentDetails> newRentDetails = report2.newRentDetails(report1)
 
         then:
-        !oldRentDetails.contains(rentDetails1)
-        !oldRentDetails.contains(rentDetails2)
-        !oldRentDetails.contains(rentDetails3)
-        oldRentDetails.contains(rentDetails4)
+        !newRentDetails.contains(rentDetails1)
+        !newRentDetails.contains(rentDetails2)
+        !newRentDetails.contains(rentDetails3)
+        newRentDetails.contains(rentDetails4)
     }
 }

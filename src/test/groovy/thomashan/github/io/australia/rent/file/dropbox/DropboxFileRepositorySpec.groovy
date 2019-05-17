@@ -19,7 +19,7 @@ class DropboxFileRepositorySpec extends Specification {
         dropboxFileRepository.upload(file, fileName)
 
         then:
-        dropboxFileRepository.read(fileName).fullName == fileName
+        dropboxFileRepository.read(fileName) != null
         dropboxFileRepository.delete(fileName)
     }
 }

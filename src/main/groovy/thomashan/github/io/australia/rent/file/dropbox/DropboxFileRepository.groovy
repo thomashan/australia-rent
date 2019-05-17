@@ -1,14 +1,14 @@
 package thomashan.github.io.australia.rent.file.dropbox
 
+
 import com.dropbox.core.DbxException
 import com.dropbox.core.DbxRequestConfig
 import com.dropbox.core.util.IOUtil
 import com.dropbox.core.v2.DbxClientV2
 import com.dropbox.core.v2.files.FileMetadata
-import com.dropbox.core.v2.files.Metadata
+import com.dropbox.core.v2.files.GetMetadataErrorException
 import com.dropbox.core.v2.files.UploadErrorException
 import com.dropbox.core.v2.files.WriteMode
-import thomashan.github.io.australia.rent.file.ExternalFile
 import thomashan.github.io.australia.rent.file.FileRepository
 
 class DropboxFileRepository implements FileRepository {
@@ -44,10 +44,18 @@ class DropboxFileRepository implements FileRepository {
     }
 
     @Override
-    ExternalFile read(String fileName) {
-        Metadata metadata = client.files().getMetadata(fileName)
+    InputStream read(String fileName) {
+        try {
+            client.files().getMetadata(fileName)
+        } catch (GetMetadataErrorException ex) {
+            if (ex.errorValue.pathValue.notFound) {
+                return null
+            }
 
-        return new ExternalFile(metadata.name, metadata.pathLower)
+            throw ex
+        }
+
+        return client.files().download(fileName).inputStream
     }
 
     @Override
@@ -67,7 +75,7 @@ class DropboxFileRepository implements FileRepository {
             printProgress(bytesWritten, file.length())
         }
 
-        private void printProgress(long uploaded, long size) {
+        private static void printProgress(long uploaded, long size) {
             System.out.printf("Uploaded %12d / %12d bytes (%5.2f%%)\n", uploaded, size, 100 * (uploaded / (double) size))
         }
     }

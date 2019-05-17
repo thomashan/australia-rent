@@ -1,12 +1,12 @@
 package thomashan.github.io.australia.rent.domain
 
-import geb.spock.GebReportingSpec
+import geb.spock.GebSpec
 import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.SearchQuery
 
 import static java.util.Optional.empty
 
-class RentDomainRepositorySpec extends GebReportingSpec {
+class RentDomainRepositorySpec extends GebSpec {
     private RentDomainRepository rentDomainRepository = new RentDomainRepository()
 
     def "get all listing"() {

@@ -4,6 +4,7 @@ jdk:
   - openjdk11
 
 addons:
+  chrome: beta
   sonarcloud:
     organization: "thomashan-github"
 

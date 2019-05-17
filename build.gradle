@@ -25,8 +25,8 @@ targetCompatibility = 1.9
 group "thomashan.github.io"
 
 ext {
-    gebVersion = "2.2"
-    seleniumVersion = "3.141.59"
+    gebVersion = "2.3.1"
+    seleniumVersion = "3.14.0"
     groovyBaseVersion = "2.5"
     groovyFullVersion = "2.5.6"
 }
@@ -41,7 +41,8 @@ dependencies {
     implementation "org.spockframework:spock-core:1.2-groovy-${groovyBaseVersion}"
     implementation "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
     implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
-    implementation "org.seleniumhq.selenium:htmlunit-driver:2.33.3"
+//    implementation "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
+    implementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
 
     implementation "io.sgr:s2-geometry-library-java:1.0.0"
     implementation "com.xlson.groovycsv:groovycsv:1.3"

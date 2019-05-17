@@ -1,6 +1,6 @@
 plugins {
     id "com.gradle.build-scan" version "2.1"
-    id "com.github.erdi.webdriver-binaries" version "2.0"
+    id "com.github.erdi.webdriver-binaries" version "2.1"
 }
 
 buildScan {
@@ -32,6 +32,7 @@ ext {
 }
 
 dependencies {
+    compile "com.google.guava:guava:27.1-jre"
     compile("org.codehaus.groovy:groovy-all:${groovyFullVersion}") {
         exclude(group: "junit")
     }
@@ -41,7 +42,6 @@ dependencies {
     implementation "org.spockframework:spock-core:1.2-groovy-${groovyBaseVersion}"
     implementation "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
     implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
-//    implementation "org.seleniumhq.selenium:selenium-firefox-driver:${seleniumVersion}"
     implementation "org.seleniumhq.selenium:htmlunit-driver:2.35.1"
 
     implementation "io.sgr:s2-geometry-library-java:1.0.0"
@@ -55,7 +55,7 @@ dependencies {
 }
 
 webdriverBinaries {
-    geckodriver "0.23.0"
+    chromedriver "74.0.3729.6"
 }
 
 jacocoTestReport {

@@ -10,9 +10,16 @@ import thomashan.github.io.australia.rent.geocode.Geocoder
 
 class GoogleGeocoder implements Geocoder {
     private static final String GOOGLE_API_KEY = System.getenv("GOOGLE_API_KEY")
-    GeoApiContext geoApiContext = new GeoApiContext.Builder()
-            .apiKey(GOOGLE_API_KEY)
-            .build()
+    private GeoApiContext geoApiContext
+
+    GoogleGeocoder() {
+        if (!GOOGLE_API_KEY) {
+            throw new RuntimeException("Please specify GOOGLE_API_KEY")
+        }
+        geoApiContext = new GeoApiContext.Builder()
+                .apiKey(GOOGLE_API_KEY)
+                .build()
+    }
 
 
     @Override

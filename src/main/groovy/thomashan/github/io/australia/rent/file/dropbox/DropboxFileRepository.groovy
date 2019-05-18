@@ -18,6 +18,9 @@ class DropboxFileRepository implements FileRepository {
 
     DropboxFileRepository() {
         DbxRequestConfig config = DbxRequestConfig.newBuilder("australia_rent").build()
+        if(!ACCESS_TOKEN) {
+            throw new RuntimeException("Please specify DROPBOX_ACCESS_TOKEN")
+        }
         client = new DbxClientV2(config, ACCESS_TOKEN)
     }
 

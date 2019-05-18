@@ -6,19 +6,19 @@ import thomashan.github.io.australia.rent.geb.FullPageScreenshotReporter
 
 //import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
-//driver = {
-//    FirefoxOptions firefoxOptions = new FirefoxOptions()
-//    firefoxOptions.setHeadless(true)
-//
-//    return new FirefoxDriver(firefoxOptions)
-//}
 driver = {
-    ChromeOptions chromeOptions = new ChromeOptions()
-    chromeOptions.setHeadless(true)
+    FirefoxOptions firefoxOptions = new FirefoxOptions()
+    firefoxOptions.setHeadless(true)
 
-    return new ChromeDriver(chromeOptions)
+    return new FirefoxDriver(firefoxOptions)
 }
+//driver = {
+//    ChromeOptions chromeOptions = new ChromeOptions()
+//    chromeOptions.setHeadless(true)
+//
+//    return new ChromeDriver(chromeOptions)
+//}
 
-reportsDir = "target/geb-reports"
+reportsDir = "build/geb-reports"
 reporter = new FullPageScreenshotReporter()
-//reportOnTestFailureOnly = true
+reportOnTestFailureOnly = true

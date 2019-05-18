@@ -8,5 +8,12 @@ addons:
   sonarcloud:
     organization: "thomashan-github"
 
+before_install:
+  - rvm install 2.2.6
+  - gem install dropbox-deployment
+
 script:
   - xvfb-run ./gradlew --scan build jacocoTestReport
+
+after_success:
+  - dropbox-deployment

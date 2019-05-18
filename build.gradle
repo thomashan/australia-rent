@@ -36,6 +36,7 @@ dependencies {
     compile("org.codehaus.groovy:groovy-all:${groovyFullVersion}") {
         exclude(group: "junit")
     }
+    compile "ru.yandex.qatools.ashot:ashot:1.5.2"
 
     implementation "org.gebish:geb-spock:${gebVersion}"
     implementation "org.gebish:geb-core:${gebVersion}"
@@ -56,6 +57,7 @@ dependencies {
 
 webdriverBinaries {
     chromedriver "74.0.3729.6"
+    geckodriver "0.24.0"
 }
 
 jacocoTestReport {

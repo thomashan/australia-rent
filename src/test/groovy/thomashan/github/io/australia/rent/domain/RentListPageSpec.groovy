@@ -1,12 +1,12 @@
 package thomashan.github.io.australia.rent.domain
 
-import geb.spock.GebSpec
+import geb.spock.GebReportingSpec
 import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.SearchQuery
 
 import static java.util.Optional.empty
 
-class RentListPageSpec extends GebSpec {
+class RentListPageSpec extends GebReportingSpec {
     private SearchQuery searchQuery = new SearchQuery(550, 600, 3, empty())
 
     def "list only includes non ad listing"() {

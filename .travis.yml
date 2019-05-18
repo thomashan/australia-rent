@@ -16,4 +16,4 @@ script:
   - xvfb-run ./gradlew --scan build jacocoTestReport
 
 after_success:
-  - dropbox-deployment
+  - ./dropbox-deployment.sh dropbox-deployment

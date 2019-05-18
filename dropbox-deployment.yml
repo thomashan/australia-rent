@@ -1,4 +1,0 @@
-deploy:
-  dropbox_path: /Apps/Australia Rent/test/$TRAVIS_BUILD_NUMBER
-  artifacts_path: /build/geb-reports
-  debug: true

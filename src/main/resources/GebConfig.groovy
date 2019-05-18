@@ -1,15 +1,24 @@
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
+import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.firefox.FirefoxOptions
+import thomashan.github.io.australia.rent.geb.FullPageScreenshotReporter
+
 //import org.openqa.selenium.htmlunit.HtmlUnitDriver
-//import org.openqa.selenium.firefox.FirefoxDriver
 
-//driver = { new FirefoxDriver() }
-//driver = { new HtmlUnitDriver() }
 driver = {
-    ChromeOptions chromeOptions = new ChromeOptions()
-    chromeOptions.addArguments("headless")
+    FirefoxOptions firefoxOptions = new FirefoxOptions()
+    firefoxOptions.setHeadless(true)
 
-    return new ChromeDriver(chromeOptions)
+    return new FirefoxDriver(firefoxOptions)
 }
+//driver = {
+//    ChromeOptions chromeOptions = new ChromeOptions()
+//    chromeOptions.setHeadless(true)
+//
+//    return new ChromeDriver(chromeOptions)
+//}
 
-reportOnTestFailureOnly = true
+reportsDir = "target/geb-reports"
+reporter = new FullPageScreenshotReporter()
+//reportOnTestFailureOnly = true

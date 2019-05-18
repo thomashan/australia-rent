@@ -26,7 +26,9 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
     }
 
     private String line(RentDetails r) {
-        return [price(r), address(r), suburb(r), state(r), postcode(r), latitude(r), longitude(r)].inject { result, field -> "${result},${field}" } + newline
+        return [price(r), address(r), suburb(r), state(r), postcode(r), latitude(r), longitude(r)]
+                .collect { "\"${it}\"" }
+                .inject { result, field -> "${result},${field}" } + newline
     }
 
     private String price(RentDetails rentDetails) {

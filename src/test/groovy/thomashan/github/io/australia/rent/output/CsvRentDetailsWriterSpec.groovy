@@ -28,7 +28,7 @@ class CsvRentDetailsWriterSpec extends Specification {
         File file = csvRentDetailsWriter.file(rentDetails)
 
         then:
-        file.readLines() == [header, ',anonAddress,anonSuburb,anonState,anonPostcode,0.0,0.0']
+        file.readLines() == [header, '"","anonAddress","anonSuburb","anonState","anonPostcode","0.0","0.0"']
         file.deleteOnExit()
     }
 
@@ -40,7 +40,7 @@ class CsvRentDetailsWriterSpec extends Specification {
         File file = csvRentDetailsWriter.file(rentDetails)
 
         then:
-        file.readLines() == [header, '100,anonAddress,anonSuburb,anonState,anonPostcode,,']
+        file.readLines() == [header, '"100","anonAddress","anonSuburb","anonState","anonPostcode","",""']
         file.deleteOnExit()
     }
 }

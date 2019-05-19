@@ -4,7 +4,7 @@ jdk:
   - openjdk11
 
 addons:
-  firefox: latest
+  firefox: "66.0.5"
   chrome: stable
   sonarcloud:
     organization: "thomashan-github"

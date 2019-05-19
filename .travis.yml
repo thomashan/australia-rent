@@ -16,5 +16,5 @@ before_install:
 script:
   - ./gradlew --scan build jacocoTestReport
 
-after_success:
+after_failure:
   - ./dropbox-deployment.sh dropbox-deployment

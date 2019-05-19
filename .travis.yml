@@ -4,6 +4,7 @@ jdk:
   - openjdk11
 
 addons:
+  firefox: latest
   chrome: stable
   sonarcloud:
     organization: "thomashan-github"
@@ -13,7 +14,7 @@ before_install:
   - gem install dropbox-deployment
 
 script:
-  - xvfb-run ./gradlew --scan build jacocoTestReport
+  - ./gradlew --scan build jacocoTestReport
 
 after_success:
   - ./dropbox-deployment.sh dropbox-deployment

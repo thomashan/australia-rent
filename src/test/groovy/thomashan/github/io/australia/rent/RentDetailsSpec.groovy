@@ -3,7 +3,7 @@ package thomashan.github.io.australia.rent
 import spock.lang.Specification
 
 class RentDetailsSpec extends Specification {
-    private RentDetails rentDetails = new RentDetails(Optional.of(1), "anonAddress", "anonSuburb", "anonState", "anonPostcode", Optional.of(new LatLongCoordinates(0, 0)))
+    private RentDetails rentDetails = new RentDetails(Optional.of(1), "anonAddress", "anonSuburb", "anonState", "anonPostcode", 0, 0, 0, Optional.of(new LatLongCoordinates(0, 0)))
 
     def "equals should return true if every field is the same"() {
         when:

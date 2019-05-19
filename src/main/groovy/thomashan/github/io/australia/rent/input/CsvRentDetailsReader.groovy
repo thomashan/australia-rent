@@ -13,7 +13,15 @@ class CsvRentDetailsReader implements RentDetailsReader {
 
         reader.withCloseable {
             return CsvParser.parseCsv(reader).collect {
-                return new RentDetails(price(it), it["address"], it["suburb"], it["state"], it["postcode"], coordinates(it))
+                return new RentDetails(price(it),
+                        it["address"],
+                        it["suburb"],
+                        it["state"],
+                        it["postcode"],
+                        it["bedrooms"] as Integer,
+                        it["bathrooms"] as Integer,
+                        it["parking"] as Integer,
+                        coordinates(it))
             }
         }
     }

@@ -14,6 +14,9 @@ class CsvRentDetailsReaderSpec extends Specification {
         then:
         rentDetails.size() == 1
         rentDetail.price.get() == 0
+        rentDetail.bedrooms == 0
+        rentDetail.bathrooms == 0
+        rentDetail.parking == 0
         rentDetail.address == "anonAddress"
         rentDetail.suburb == "anonSuburb"
         rentDetail.state == "anonState"

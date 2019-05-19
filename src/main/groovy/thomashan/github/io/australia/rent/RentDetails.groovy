@@ -11,5 +11,8 @@ class RentDetails {
     String suburb
     String state
     String postcode
+    Integer bedrooms
+    Integer bathrooms
+    Integer parking
     Optional<LatLongCoordinates> coordinates = Optional.empty()
 }

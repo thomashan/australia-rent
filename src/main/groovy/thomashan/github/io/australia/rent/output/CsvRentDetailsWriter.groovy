@@ -22,11 +22,20 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
     }
 
     private String getHeaderLine() {
-        return ["price", "address", "suburb", "state", "postcode", "latitude", "longitude"].inject { result, field -> "${result},${field}" } + newline
+        return ["price", "bedrooms", "bathrooms", "parking", "address", "suburb", "state", "postcode", "latitude", "longitude"].inject { result, field -> "${result},${field}" } + newline
     }
 
     private String line(RentDetails r) {
-        return [price(r), address(r), suburb(r), state(r), postcode(r), latitude(r), longitude(r)]
+        return [price(r),
+                bedrooms(r),
+                bathrooms(r),
+                parking(r),
+                address(r),
+                suburb(r),
+                state(r),
+                postcode(r),
+                latitude(r),
+                longitude(r)]
                 .collect { doubleQuotes(it) }
                 .inject { result, field -> "${result},${field}" } + newline
     }
@@ -37,6 +46,18 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
 
     private String price(RentDetails rentDetails) {
         return !rentDetails.price.empty ? rentDetails.price.get().toString() : ""
+    }
+
+    private String bedrooms(RentDetails rentDetails) {
+        return rentDetails.bedrooms.toString()
+    }
+
+    private String bathrooms(RentDetails rentDetails) {
+        return rentDetails.bathrooms.toString()
+    }
+
+    private String parking(RentDetails rentDetails) {
+        return rentDetails.parking.toString()
     }
 
     private String address(RentDetails rentDetails) {

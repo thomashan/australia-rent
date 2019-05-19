@@ -35,6 +35,9 @@ class RentListPageSpec extends GebReportingSpec {
         rentDetails.suburb.startsWith("A")
         rentDetails.state == "VIC"
         rentDetails.postcode.startsWith("3")
+        rentDetails.bedrooms == 3
+        rentDetails.bathrooms == 2
+        rentDetails.parking == 1
     }
 
     def "get current page number"() {

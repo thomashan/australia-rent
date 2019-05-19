@@ -3,6 +3,8 @@ package thomashan.github.io.australia.rent
 
 import spock.lang.Specification
 
+import java.util.regex.Matcher
+
 class PriceRegexSpec extends Specification {
     def "price is not stated"() {
         when:
@@ -82,7 +84,7 @@ class PriceRegexSpec extends Specification {
     }
 
     private Optional<Number> getPrice(String price) {
-        def matcher = price =~ /(\d+\.?\d+)/
+        Matcher matcher = price =~ /(\d+\.?\d+)/
 
         return matcher.count > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
     }

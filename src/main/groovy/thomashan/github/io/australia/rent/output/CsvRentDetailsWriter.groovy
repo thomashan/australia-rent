@@ -27,8 +27,12 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
 
     private String line(RentDetails r) {
         return [price(r), address(r), suburb(r), state(r), postcode(r), latitude(r), longitude(r)]
-                .collect { "\"${it}\"" }
+                .collect { doubleQuotes(it) }
                 .inject { result, field -> "${result},${field}" } + newline
+    }
+
+    private String doubleQuotes(String input) {
+        return "\"${input}\""
     }
 
     private String price(RentDetails rentDetails) {

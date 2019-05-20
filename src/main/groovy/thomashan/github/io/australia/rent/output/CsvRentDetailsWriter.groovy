@@ -30,13 +30,12 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
                 bedrooms(r),
                 bathrooms(r),
                 parking(r),
-                address(r),
-                suburb(r),
-                state(r),
-                postcode(r),
+                doubleQuotes(address(r)),
+                doubleQuotes(suburb(r)),
+                doubleQuotes(state(r)),
+                doubleQuotes(postcode(r)),
                 latitude(r),
                 longitude(r)]
-                .collect { doubleQuotes(it) }
                 .inject { result, field -> "${result},${field}" } + newline
     }
 

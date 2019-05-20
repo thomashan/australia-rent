@@ -32,7 +32,7 @@ class GoogleGeocoder implements Geocoder {
                 GeocodingResult geocodingResult = geocodingResults[0]
                 LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
 
-                return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, Optional.of(latLongCoordinates))
+                return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
             }
         }
     }

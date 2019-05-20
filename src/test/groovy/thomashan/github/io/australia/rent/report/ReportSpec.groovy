@@ -12,10 +12,10 @@ class ReportSpec extends Specification {
     private Report report2
 
     def setup() {
-        rentDetails1 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", Optional.empty())
-        rentDetails2 = new RentDetails(Optional.of(1), "anonAddress2", "anonSuburb2", "anonState2", "anonPostcode2", Optional.empty())
-        rentDetails3 = new RentDetails(Optional.of(1), "anonAddress3", "anonSuburb3", "anonState3", "anonPostcode3", Optional.empty())
-        rentDetails4 = new RentDetails(Optional.of(1), "anonAddress4", "anonSuburb4", "anonState4", "anonPostcode4", Optional.empty())
+        rentDetails1 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.empty())
+        rentDetails2 = new RentDetails(Optional.of(1), "anonAddress2", "anonSuburb2", "anonState2", "anonPostcode2", 0, 0, 0, Optional.empty())
+        rentDetails3 = new RentDetails(Optional.of(1), "anonAddress3", "anonSuburb3", "anonState3", "anonPostcode3", 0, 0, 0, Optional.empty())
+        rentDetails4 = new RentDetails(Optional.of(1), "anonAddress4", "anonSuburb4", "anonState4", "anonPostcode4", 0, 0, 0, Optional.empty())
 
         report1 = new Report([rentDetails1, rentDetails2, rentDetails3])
         report2 = new Report([rentDetails2, rentDetails3, rentDetails4])

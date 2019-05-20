@@ -7,6 +7,7 @@ import thomashan.github.io.australia.rent.domain.RentDomainRepository
 import thomashan.github.io.australia.rent.file.FileRepository
 import thomashan.github.io.australia.rent.file.dropbox.DropboxFileRepository
 import thomashan.github.io.australia.rent.output.CsvRentDetailsWriter
+import thomashan.github.io.australia.rent.report.Report
 import thomashan.github.io.australia.rent.report.ReportName
 
 import java.time.LocalDate
@@ -18,14 +19,19 @@ class Step1 implements Search {
     private FileRepository fileRepository = new DropboxFileRepository()
     private CsvRentDetailsWriter csvRentDetailsWriter = new CsvRentDetailsWriter()
     final SearchQuery searchQuery = new SearchQuery(550, 650, 3, empty())
+    private final LocalDate today = LocalDate.now()
 
     void search() {
-        fileRepository.read()
-
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)
-        File file = csvRentDetailsWriter.file(rentDetails)
+        Report oldReport = new Report(getPrevious())
+        Report report = new Report(rentDetails)
 
-        ReportName reportName = new ReportName(this, LocalDate.now())
-        fileRepository.upload(file, reportName.value)
+        File reportFile = csvRentDetailsWriter.file(report.rentDetails)
+        File deletedEntriesReportFile = csvRentDetailsWriter.file(report.oldRentDetails(oldReport))
+        File newEntriesReportFile = csvRentDetailsWriter.file(report.newRentDetails(oldReport))
+
+        fileRepository.upload(reportFile, new ReportName(this, today).value)
+        fileRepository.upload(deletedEntriesReportFile, new ReportName(this, today, Optional.of("deleted")).value)
+        fileRepository.upload(newEntriesReportFile, new ReportName(this, today, Optional.of("new")).value)
     }
 }

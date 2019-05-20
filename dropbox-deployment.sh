@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "Generating dropbox-deployment.yml"
+
 rm -f dropbox-deployment.yml
 ( echo "deploy:";
   echo "  dropbox_path: /geb-reports/${TRAVIS_BUILD_NUMBER}";

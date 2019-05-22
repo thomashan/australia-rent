@@ -11,7 +11,7 @@ class RentDomainRepositorySpec extends GebReportingSpec {
 
     def "get all listing"() {
         when:
-        List<RentDetails> rentDetails = rentDomainRepository.findAll(new SearchQuery(550, 600, 3, empty()))
+        List<RentDetails> rentDetails = rentDomainRepository.findAll(new SearchQuery(4500, 5000, 3, empty()))
 
         then:
         rentDetails.size() > 0

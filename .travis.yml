@@ -18,7 +18,7 @@ before_install:
   - gem install dropbox-deployment
 
 script:
-  - ./gradlew --scan -i build jacocoTestReport
+  - xvfb-run ./gradlew --scan -i build jacocoTestReport
 
 after_failure:
   - ./dropbox-deployment.sh dropbox-deployment

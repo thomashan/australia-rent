@@ -28,7 +28,9 @@ class GoogleGeocoder implements Geocoder {
             if (!it.coordinates.empty) {
                 return it
             } else {
-                GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, "${it.address}, ${it.suburb}, ${it.state} ${it.postcode}").await()
+                String fullAddress = "${it.address}, ${it.suburb}, ${it.state} ${it.postcode}"
+                println("Geocoding: ${fullAddress}")
+                GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, fullAddress).await()
                 GeocodingResult geocodingResult = geocodingResults[0]
                 LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
 

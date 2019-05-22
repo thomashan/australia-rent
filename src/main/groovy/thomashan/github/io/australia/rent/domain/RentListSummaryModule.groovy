@@ -19,7 +19,12 @@ class RentListSummaryModule extends Module {
             String address1 = $("span.address-line1").text()
             return address1 ? address1?.strip() - "," : ""
         }
-        suburb { $("span.address-line2 span[itemprop='addressLocality']").text() }
+        suburb {
+            String suburb = $("span.address-line2 span[itemprop='addressLocality']").text()
+            println("suburb: ${suburb}")
+
+            return suburb
+        }
         state { $("span.address-line2 span[itemprop='addressRegion']").text() }
         postcode { $("span.address-line2 span[itemprop='postalCode']").text() }
         bedrooms {

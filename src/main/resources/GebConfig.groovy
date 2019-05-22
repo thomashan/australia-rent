@@ -1,3 +1,5 @@
+import geb.report.CompositeReporter
+import geb.report.PageSourceReporter
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
@@ -20,5 +22,5 @@ driver = {
 //}
 
 reportsDir = "build/geb-reports"
-reporter = new FullPageScreenshotReporter()
+reporter = new CompositeReporter(new FullPageScreenshotReporter(), new PageSourceReporter())
 reportOnTestFailureOnly = true

@@ -17,7 +17,7 @@ class GoogleGeocoderSpec extends Specification {
         RentDetails resultantRentDetails1 = resultantRentDetails[0]
 
         then:
-        resultantRentDetails1.coordinates.get() == -37.887699
+        resultantRentDetails1.coordinates.get().latitude == -37.887699
         resultantRentDetails1.coordinates.get().longitude == 145.152062
     }
 

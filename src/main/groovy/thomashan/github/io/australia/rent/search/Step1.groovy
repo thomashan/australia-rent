@@ -21,8 +21,8 @@ class Step1 implements Search {
     private FileRepository fileRepository = new DropboxFileRepository()
     private CsvRentDetailsWriter csvRentDetailsWriter = new CsvRentDetailsWriter()
     private Geocoder geocoder = new GoogleGeocoder()
-    final SearchQuery searchQuery = new SearchQuery(550, 650, 3, empty())
     private final LocalDate today = LocalDate.now()
+    final SearchQuery searchQuery = new SearchQuery(550, 650, 3, empty())
 
     void search() {
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)
@@ -30,7 +30,7 @@ class Step1 implements Search {
         ReportContents report = new ReportContents(rentDetails)
 
         List<RentDetails> oldRentDetails = report.oldRentDetails(oldReport)
-        List<RentDetails> commonRentDetails = report.commonRentDetails(oldReport)
+        List<RentDetails> commonRentDetails = geocoder.geocode(report.commonRentDetails(oldReport))
         List<RentDetails> newRentDetails = geocoder.geocode(report.newRentDetails(oldReport))
 
         File deletedEntriesReportFile = csvRentDetailsWriter.file(oldRentDetails)

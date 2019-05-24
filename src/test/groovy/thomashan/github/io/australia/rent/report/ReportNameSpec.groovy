@@ -6,26 +6,80 @@ import thomashan.github.io.australia.rent.search.Search
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 class ReportNameSpec extends Specification {
     private Search search = new SearchImpl()
     private LocalDate today = LocalDate.now()
     private DateTimeFormatter f = DateTimeFormatter.BASIC_ISO_DATE
+    private fileName = today.format(f)
 
-    def "getValue no suffix"() {
+    def "fullPath without suffix"() {
         when:
         ReportName reportName = new ReportName(search, today)
 
         then:
-        reportName.value == "/prices_200-400_bedrooms_2+/${today.format(f)}.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2+/${fileName}.csv"
     }
 
-    def "getValue suffix"() {
+    def "fullPath with suffix"() {
         when:
         ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
 
         then:
-        reportName.value == "/prices_200-400_bedrooms_2+/${today.format(f)}_suffix.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2+/${fileName}_suffix.csv"
+    }
+
+    def "fileName without suffix"() {
+        when:
+        ReportName reportName = new ReportName(search, today)
+
+        then:
+        reportName.fileName == "${fileName}.csv"
+    }
+
+    def "fileName with suffix"() {
+        when:
+        ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
+
+        then:
+        reportName.fileName == "${fileName}_suffix.csv"
+    }
+
+    def "fileNamePattern without suffix"() {
+        when:
+        ReportName reportName = new ReportName(search, today)
+
+        then:
+        reportName.fileNamePattern == "\\d{8}\\.csv"
+    }
+
+    def "fileNamePattern with suffix"() {
+        when:
+        ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
+
+        then:
+        reportName.fileNamePattern == "\\d{8}_suffix\\.csv"
+    }
+
+    def "fileNamePattern matches exact file name"() {
+        when:
+        Pattern pattern = Pattern.compile("\\d{8}\\.csv")
+        Matcher matcher = pattern.matcher("20000101.csv")
+
+        then:
+        matcher.count == 1
+        matcher[0] == "20000101.csv"
+    }
+
+    def "fileNamePattern does not match file name with suffix"() {
+        when:
+        Pattern pattern = Pattern.compile("\\d{8}\\.csv")
+        Matcher matcher = pattern.matcher("20000101_suffix.csv")
+
+        then:
+        matcher.count == 0
     }
 
     private static final class SearchImpl implements Search {
@@ -37,6 +91,11 @@ class ReportNameSpec extends Specification {
         @Override
         void search() {
             throw new UnsupportedOperationException()
+        }
+
+        @Override
+        String getName() {
+            return "test/prices_${prices}_bedrooms_${bedrooms}"
         }
     }
 }

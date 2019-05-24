@@ -6,12 +6,22 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class ReportName {
-    final String value
+    final String base
+    final String fullPath
+    final String fileName
+    final Optional<String> suffix
+    final String fileNamePattern
 
     ReportName(Search search, LocalDate localDate, Optional<String> suffix = Optional.empty()) {
         DateTimeFormatter f = DateTimeFormatter.BASIC_ISO_DATE
-        String tempValue1 = "/${search.name}/${localDate.format(f)}"
-        String tempValue2 = suffix.isEmpty() ? ".csv" : "_${suffix.get()}.csv"
-        this.value = tempValue1 + tempValue2
+        String fileNamePrefix = "${localDate.format(f)}"
+        String fileNameSuffix = suffix.isEmpty() ? ".csv" : "_${suffix.get()}.csv"
+        String fileNameSuffixPattern = suffix.isEmpty() ? "\\.csv" : "_${suffix.get()}\\.csv"
+
+        this.base = "/${search.name}"
+        this.suffix = suffix
+        this.fileName = fileNamePrefix + fileNameSuffix
+        this.fullPath = "${base}/${fileName}"
+        this.fileNamePattern = "\\d{8}${fileNameSuffixPattern}"
     }
 }

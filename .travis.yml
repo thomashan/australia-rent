@@ -3,9 +3,22 @@ language: groovy
 jdk:
   - openjdk11
 
+env:
+  - MOZ_HEADLESS=1
+
 addons:
+  firefox: "66.0.5"
+  chrome: stable
   sonarcloud:
     organization: "thomashan-github"
 
+before_install:
+  - export DISPLAY=:0
+  - rvm install 2.2.6
+  - gem install dropbox-deployment
+
 script:
-  - xvfb-run ./gradlew --scan build jacocoTestReport
+  - xvfb-run ./gradlew --scan -i build jacocoTestReport
+
+after_failure:
+  - ./dropbox-deployment.sh dropbox-deployment

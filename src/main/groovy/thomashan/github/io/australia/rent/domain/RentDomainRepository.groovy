@@ -15,15 +15,16 @@ class RentDomainRepository implements RentRepository {
         List<RentDetails> result = []
         Browser.drive {
             to RentListPage, searchQuery
+            RentListPage rentListPage = (RentListPage) page
 
-            int pageEnd = page.pageEnd
+            int pageEnd = rentListPage.pageEnd
 
             (1..pageEnd).each { pageNumber ->
                 to RentListPage, searchQuery, page: pageNumber
                 println("currentUrl: ${currentUrl}")
 
                 try {
-                    List<RentDetails> rentailDetails = page.rentDetails
+                    List<RentDetails> rentailDetails = rentListPage.rentDetails
                     result = result + rentailDetails
                 } catch (ex) {
                     ex.printStackTrace()

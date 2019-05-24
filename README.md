@@ -2,6 +2,13 @@
 
 [![Build Status](https://travis-ci.org/thomashan/australia-rent.svg?branch=master)](https://travis-ci.org/thomashan/australia-rent)
 
+## Setting environment variables
+Set the following environment variables:
+```
+DROPBOX_ACCESS_TOKEN
+GOOGLE_API_KEY
+```
+
 ## Running with different browser drivers
 The default driver is HtmlUnit which is a headless driver.
 If you want to see the driver change `src/main/resources/GebConfig.groovy`

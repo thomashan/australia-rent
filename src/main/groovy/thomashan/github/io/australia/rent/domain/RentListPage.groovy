@@ -17,7 +17,15 @@ class RentListPage extends Page {
 
     List<RentDetails> getRentDetails() {
         return list.collect {
-            new RentDetails(price: it.price, address: it.addressLine1, suburb: it.suburb, state: it.state, postcode: it.postcode)
+            new RentDetails(price: it.price,
+                    address: it.addressLine1,
+                    suburb: it.suburb,
+                    state: it.state,
+                    postcode: it.postcode,
+                    bedrooms: it.bedrooms,
+                    bathrooms: it.bathrooms,
+                    parking: it.parking
+            )
         }
     }
 

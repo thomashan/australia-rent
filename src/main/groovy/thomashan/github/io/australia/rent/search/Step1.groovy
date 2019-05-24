@@ -26,7 +26,7 @@ class Step1 implements Search {
 
     void search() {
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)
-        ReportContents oldReport = new ReportContents(getPrevious())
+        ReportContents oldReport = new ReportContents(getLatest())
         ReportContents report = new ReportContents(rentDetails)
 
         List<RentDetails> oldRentDetails = report.oldRentDetails(oldReport)

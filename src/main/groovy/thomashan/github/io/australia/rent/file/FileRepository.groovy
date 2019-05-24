@@ -7,5 +7,5 @@ trait FileRepository {
 
     abstract void delete(String fileName)
 
-    abstract List<String> list(String directory)
+    abstract List<FileInformation> list(String directory)
 }

@@ -1,0 +1,4 @@
+price,bedrooms,bathrooms,parking,address,suburb,state,postcode,latitude,longitude
+0,0,0,0,anonAddress1,anonSuburb1,anonState1,anonPostcode1,0.0,0.0
+0,0,0,0,anonAddress2,anonSuburb2,anonState2,anonPostcode2,0.0,0.0
+0,0,0,0,anonAddress3,anonSuburb3,anonState3,anonPostcode3,0.0,0.0

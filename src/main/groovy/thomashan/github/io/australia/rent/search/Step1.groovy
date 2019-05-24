@@ -9,7 +9,7 @@ import thomashan.github.io.australia.rent.file.dropbox.DropboxFileRepository
 import thomashan.github.io.australia.rent.geocode.Geocoder
 import thomashan.github.io.australia.rent.geocode.google.GoogleGeocoder
 import thomashan.github.io.australia.rent.output.CsvRentDetailsWriter
-import thomashan.github.io.australia.rent.report.Report
+import thomashan.github.io.australia.rent.report.ReportContents
 import thomashan.github.io.australia.rent.report.ReportName
 
 import java.time.LocalDate
@@ -26,8 +26,8 @@ class Step1 implements Search {
 
     void search() {
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)
-        Report oldReport = new Report(getPrevious())
-        Report report = new Report(rentDetails)
+        ReportContents oldReport = new ReportContents(getPrevious())
+        ReportContents report = new ReportContents(rentDetails)
 
         List<RentDetails> oldRentDetails = report.oldRentDetails(oldReport)
         List<RentDetails> commonRentDetails = report.commonRentDetails(oldReport)
@@ -37,8 +37,8 @@ class Step1 implements Search {
         File newEntriesReportFile = csvRentDetailsWriter.file(newRentDetails)
         File reportFile = csvRentDetailsWriter.file(commonRentDetails + newRentDetails)
 
-        fileRepository.upload(reportFile, new ReportName(this, today).value)
-        fileRepository.upload(deletedEntriesReportFile, new ReportName(this, today, Optional.of("deleted")).value)
-        fileRepository.upload(newEntriesReportFile, new ReportName(this, today, Optional.of("new")).value)
+        fileRepository.upload(reportFile, new ReportName(this, today).fullPath)
+        fileRepository.upload(deletedEntriesReportFile, new ReportName(this, today, Optional.of("deleted")).fullPath)
+        fileRepository.upload(newEntriesReportFile, new ReportName(this, today, Optional.of("new")).fullPath)
     }
 }

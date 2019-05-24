@@ -6,4 +6,6 @@ trait FileRepository {
     abstract InputStream read(String fileName)
 
     abstract void delete(String fileName)
+
+    abstract List<String> list(String directory)
 }

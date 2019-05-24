@@ -1,15 +1,14 @@
 package thomashan.github.io.australia.rent.file.dropbox
 
-
 import com.dropbox.core.DbxException
 import com.dropbox.core.DbxRequestConfig
 import com.dropbox.core.util.IOUtil
 import com.dropbox.core.v2.DbxClientV2
-import com.dropbox.core.v2.files.FileMetadata
-import com.dropbox.core.v2.files.GetMetadataErrorException
-import com.dropbox.core.v2.files.UploadErrorException
-import com.dropbox.core.v2.files.WriteMode
+import com.dropbox.core.v2.files.*
+import thomashan.github.io.australia.rent.file.FileInformation
 import thomashan.github.io.australia.rent.file.FileRepository
+
+import java.time.ZoneId
 
 class DropboxFileRepository implements FileRepository {
     private static final String ACCESS_TOKEN = System.getenv("DROPBOX_ACCESS_TOKEN")
@@ -18,7 +17,7 @@ class DropboxFileRepository implements FileRepository {
 
     DropboxFileRepository() {
         DbxRequestConfig config = DbxRequestConfig.newBuilder("australia_rent").build()
-        if(!ACCESS_TOKEN) {
+        if (!ACCESS_TOKEN) {
             throw new RuntimeException("Please specify DROPBOX_ACCESS_TOKEN")
         }
         client = new DbxClientV2(config, ACCESS_TOKEN)
@@ -64,6 +63,19 @@ class DropboxFileRepository implements FileRepository {
     @Override
     void delete(String fileName) {
         client.files().deleteV2(fileName)
+    }
+
+    @Override
+    List<FileInformation> list(String directory) {
+        ListFolderResult listFolderResult = client.files().listFolder(directory)
+        List<Metadata> metadata = listFolderResult.entries
+        List<FileMetadata> fileMetadata = metadata.findAll { Metadata m ->
+            return m instanceof FileMetadata
+        }
+
+        return fileMetadata.collect { FileMetadata f ->
+            new FileInformation(f.pathDisplay, f.serverModified.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+        }
     }
 
     private static class MyProgressListener implements IOUtil.ProgressListener {

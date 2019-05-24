@@ -1,6 +1,7 @@
 package thomashan.github.io.australia.rent.file.dropbox
 
 import spock.lang.Specification
+import thomashan.github.io.australia.rent.file.FileInformation
 
 class DropboxFileRepositorySpec extends Specification {
     private DropboxFileRepository dropboxFileRepository = new DropboxFileRepository()
@@ -10,7 +11,7 @@ class DropboxFileRepositorySpec extends Specification {
         new DropboxFileRepository().delete(basePath)
     }
 
-    def "should write file dropbox"() {
+    def "should upload file dropbox"() {
         given:
         String fileName = "${basePath}/test.csv"
         File file = new File(this.class.getResource("/rent_details.csv").toURI())
@@ -20,6 +21,18 @@ class DropboxFileRepositorySpec extends Specification {
 
         then:
         dropboxFileRepository.read(fileName) != null
-        dropboxFileRepository.delete(fileName)
+    }
+
+    def "should list files"() {
+        String fileName = "${basePath}/test.csv"
+        File file = new File(this.class.getResource("/rent_details.csv").toURI())
+        dropboxFileRepository.upload(file, fileName)
+
+        when:
+        List<FileInformation> files = dropboxFileRepository.list(basePath)
+
+        then:
+        !files.empty
+        files[0].fullPath == fileName
     }
 }

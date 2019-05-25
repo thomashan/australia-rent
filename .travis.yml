@@ -21,4 +21,5 @@ script:
   - xvfb-run ./gradlew --scan -i build jacocoTestReport
 
 after_failure:
-  - ./dropbox-deployment.sh dropbox-deployment
+  - ./dropbox-deployment.sh
+  - dropbox-deployment

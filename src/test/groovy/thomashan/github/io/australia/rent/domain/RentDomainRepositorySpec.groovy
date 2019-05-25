@@ -23,4 +23,12 @@ class RentDomainRepositorySpec extends GebReportingSpec {
             println(it)
         }
     }
+
+    def "fail uploads reports"() {
+        when:
+        List<RentDetails> rentDetails = rentDomainRepository.findAll(new SearchQuery(4500, 5000, 3, empty()))
+
+        then:
+        1 == 2
+    }
 }

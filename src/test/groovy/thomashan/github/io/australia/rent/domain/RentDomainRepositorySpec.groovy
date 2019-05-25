@@ -15,20 +15,9 @@ class RentDomainRepositorySpec extends GebReportingSpec {
 
         then:
         rentDetails.size() > 0
-        rentDetails.each { rentDetail ->
-            println(rentDetail)
-        }
         println(rentDetails.size())
         rentDetails.collect { it.suburb }.toSet().sort().each {
             println(it)
         }
-    }
-
-    def "fail uploads reports"() {
-        when:
-        List<RentDetails> rentDetails = rentDomainRepository.findAll(new SearchQuery(4500, 5000, 3, empty()))
-
-        then:
-        1 == 2
     }
 }

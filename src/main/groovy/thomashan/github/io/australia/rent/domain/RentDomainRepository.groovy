@@ -20,17 +20,11 @@ class RentDomainRepository implements RentRepository {
             int pageEnd = rentListPage.pageEnd
 
             (1..pageEnd).each { pageNumber ->
-                to RentListPage, searchQuery, page: pageNumber
+                RentListPage currentPage = to(RentListPage, searchQuery, page: pageNumber)
                 println("currentUrl: ${currentUrl}")
 
-                try {
-                    List<RentDetails> rentailDetails = rentListPage.rentDetails
-                    result = result + rentailDetails
-                } catch (ex) {
-                    ex.printStackTrace()
-                    println("failed at ${currentUrl}")
-                }
-
+                List<RentDetails> rentailDetails = getRentDetails(currentPage)
+                result = result + rentailDetails
             }
         }
 
@@ -39,5 +33,15 @@ class RentDomainRepository implements RentRepository {
         println("duration ${Duration.between(start, end)}")
 
         return result
+    }
+
+    private List<RentDetails> getRentDetails(RentListPage rentListPage) {
+        try {
+            return rentListPage.rentDetails
+        } catch (Exception ex) {
+            rentListPage.driver.navigate().refresh()
+
+            return getRentDetails(rentListPage)
+        }
     }
 }

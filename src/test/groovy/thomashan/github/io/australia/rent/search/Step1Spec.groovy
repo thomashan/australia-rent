@@ -1,7 +1,6 @@
 package thomashan.github.io.australia.rent.search
 
 import geb.spock.GebReportingSpec
-import spock.lang.Specification
 
 class Step1Spec extends GebReportingSpec {
     def "search test"() {

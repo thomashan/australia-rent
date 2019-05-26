@@ -15,9 +15,6 @@ class RentDomainRepositorySpec extends GebReportingSpec {
 
         then:
         rentDetails.size() > 0
-        rentDetails.each { rentDetail ->
-            println(rentDetail)
-        }
         println(rentDetails.size())
         rentDetails.collect { it.suburb }.toSet().sort().each {
             println(it)

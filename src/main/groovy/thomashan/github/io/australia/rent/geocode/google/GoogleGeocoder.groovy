@@ -32,31 +32,19 @@ class GoogleGeocoder implements Geocoder {
             if (!it.coordinates.empty) {
                 return it
             } else {
-                String fullAddress = "${it.address}, ${it.suburb}, ${it.state} ${it.postcode}"
+                String fullAddress = getFullAddress(it)
                 println("Geocoding: ${fullAddress}")
                 GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, fullAddress).await()
-                if (geocodingResults.size() > 0) {
-                    GeocodingResult geocodingResult = geocodingResults[0]
-                    LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
+                GeocodingResult geocodingResult = geocodingResults[0]
+                LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
 
-                    return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
-                } else {
-                    String fullAddress1 = "${dropUnit(it.address)}, ${it.suburb}, ${it.state} ${it.postcode}"
-                    println("Geocoding: ${fullAddress1}")
-
-                    GeocodingResult[] geocodingResults1 = GeocodingApi.geocode(geoApiContext, fullAddress1).await()
-
-                    if (geocodingResults1.size() > 0) {
-                        GeocodingResult geocodingResult1 = geocodingResults1[0]
-                        LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult1.geometry.location.lat, geocodingResult1.geometry.location.lng)
-
-                        return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
-                    }
-
-                    return it
-                }
+                return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
             }
         }
+    }
+
+    private String getFullAddress(RentDetails rentDetails) {
+        return "${dropUnit(rentDetails.address)}, ${rentDetails.suburb}, ${rentDetails.state} ${rentDetails.postcode}"
     }
 
     private String dropUnit(String address) {

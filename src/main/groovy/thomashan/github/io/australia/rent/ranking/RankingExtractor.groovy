@@ -42,6 +42,12 @@ class RankingExtractor {
                 it.ranking < threshold || (it.previousRanking.present && it.previousRanking.get() < 100)
             }
 
+            println("current good suburb")
+            goodSuburbs.sort { it.ranking }.each { println(it) }
+            println("previous good suburb")
+            goodSuburbs.findAll { it.previousRanking.present }.sort { it.previousRanking.get() }.each { println(it) }
+
+
             print(getHeaderLine())
             suburbRankings.each {
                 print(line(it))

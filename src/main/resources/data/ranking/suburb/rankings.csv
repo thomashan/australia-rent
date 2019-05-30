@@ -1,0 +1,322 @@
+suburb,ranking,previous_ranking
+"Abbotsford",33,53
+"Aberfeldie",57,14
+"Airport West",117,228
+"Albanvale",209,260
+"Albert Park",7,29
+"Albion",155,218
+"Alphington",21,67
+"Altona",102,184
+"Altona Meadows",271,236
+"Altona North",177,248
+"Ardeer",131,244
+"Armadale",4,3
+"Ascot Vale",58,80
+"Ashburton",23,68
+"Ashwood",72,87
+"Aspendale",236,266
+"Aspendale Gardens",287,286
+"Attwood",274,298
+"Avondale Heights",115,189
+"Balaclava",12,22
+"Balwyn",73,102
+"Balwyn North",76,107
+"Bangholme",312,
+"Bayswater",189,278
+"Bayswater North",283,313
+"Beaumaris",86,81
+"Belgrave",156,73
+"Belgrave Heights",241,183
+"Bellfield",114,136
+"Bentleigh",108,104
+"Bentleigh East",173,203
+"Berwick",300,274
+"Black Rock",46,54
+"Blackburn",47,89
+"Blackburn North",143,165
+"Blackburn South",118,150
+"Bonbeach",241,229
+"Boronia",223,201
+"Box Hill",41,64
+"Box Hill North",116,111
+"Box Hill South",83,137
+"Braybook",137,95
+"Briar Hill",165,125
+"Brighton",22,27
+"Brighton East",68,50
+"Broadmeadows",188,219
+"Brooklyn",195,269
+"Brunswick",78,90
+"Brunswick East",43,78
+"Brunswick West",62,41
+"Bulleen",138,140
+"Bundoora",208,235
+"Burnley",84,16
+"Burnside",315,
+"Burnside Heights",307,
+"Burwood",80,75
+"Burwood East",129,166
+"Cairnlea",298,
+"Camberwell",71,84
+"Campbellfield",262,310
+"Canterbury",26,48
+"Carlton",15,12
+"Carlton North",19,13
+"Carnegie",100,86
+"Caroline Springs",313,
+"Carrum",212,211
+"Carrum Downs",308,284
+"Caulfield",81,57
+"Caulfield East",98,77
+"Caulfield North",45,63
+"Caulfield South",50,21
+"Chadstone",95,122
+"Chelsea",275,270
+"Chelsea Heights",242,290
+"Cheltenham",133,135
+"Clarinda",227,188
+"Clayton",219,272
+"Clayton South",224,168
+"Clematis",286,
+"Clifton Hill",11,6
+"Coburg",150,112
+"Coburg North",111,154
+"Collingwood",60,31
+"Coolaroo",217,251
+"Craigieburn",317,306
+"Cranbourne",243,263
+"Cranbourne North",318,299
+"Cremorne",135,74
+"Croydon",233,226
+"Croydon Hills",237,252
+"Croydon North",244,254
+"Croydon South",245,255
+"Dallas",235,197
+"Dandenong",232,206
+"Dandenong North",285,277
+"Dandenong South",305,305
+"Deepdene",69,
+"Deer Park",295,304
+"Delahey",303,281
+"Derrimut",246,
+"Diamond Creek",196,205
+"Dingley Village",255,147
+"Docklands",88,129
+"Doncaster",139,158
+"Doncaster East",151,174
+"Donvale",191,173
+"Doveton",247,241
+"Eaglemont",148,199
+"East Melbourne",1,2
+"Edithvale",231,144
+"Elsternwick",6,24
+"Eltham",178,130
+"Eltham North",152,106
+"Elwood",20,30
+"Emerald",279,
+"Endeavour Hills",226,279
+"Epping",277,291
+"Essendon",85,45
+"Essendon North",145,109
+"Essendon West",77,99
+"Eumemmerring",250,240
+"Fairfield",13,9
+"Fawkner",122,198
+"Ferntree Gully",220,220
+"Ferny Creek",169,115
+"Fitzroy",82,70
+"Fitzroy North",38,28
+"Flemington",66,44
+"Footscray",74,37
+"Forest Hill",93,222
+"Frankston",179,193
+"Frankston North",136,212
+"Frankston South",268,231
+"Gardenvale",17,43
+"Gladstone Park",147,213
+"Glen Huntly",48,76
+"Glen Iris",31,59
+"Glen Waverley",130,155
+"Glenroy",202,196
+"Gowanbrae",218,257
+"Greensborough",168,162
+"Hadfield",229,253
+"Hallam",288,314
+"Hampton",53,10
+"Hampton East",49,20
+"Hampton Park",291,288
+"Hawthorn",18,11
+"Hawthorn East",25,4
+"Heatherton",242,190
+"Heathmont",192,113
+"Heidelberg",106,94
+"Heidelberg Heights",194,238
+"Heidelberg West",182,216
+"Highett",119,100
+"Hillside",319,
+"Hoppers Crossing",272,267
+"Hughesdale",107,98
+"Huntingdale",215,123
+"Hurstbridge",247,
+"Ivanhoe",8,32
+"Ivanhoe East",92,93
+"Jacana",103,164
+"Junction Village",310,296
+"Kallista",210,120
+"Kalorama",213,170
+"Kealba",201,258
+"Keilor",204,297
+"Keilor Downs",181,273
+"Keilor East",109,227
+"Keilor Lodge",244,311
+"Keilor Park",197,302
+"Kensington",75,88
+"Kew",34,35
+"Kew East",28,46
+"Keysborough",269,191
+"Kilsyth",280,280
+"Kilsyth South",278,308
+"Kingsbury",160,124
+"Kings Park",281,271
+"Kingsville",190,91
+"Kooyong",44,23
+"Knoxfield",198,295
+"Lalor",241,225
+"Langwarrin",294,259
+"Langwarrin South",279,
+"Laverton",183,217
+"Lilydale",297,242
+"Lower Plenty",162,138
+"Lynbrook",292,
+"Lyndhurst",306,
+"Lysterfield South",238,246
+"Macleod",141,117
+"Maidstone",186,153
+"Malvern",42,65
+"Malvern East",37,62
+"Maribyrnong",128,119
+"McKinnon",89,71
+"Meadow Heights",282,223
+"Melbourne",5,26
+"Mentone",90,178
+"Middle Park",54,61
+"Mill Park",199,230
+"Mitcham",105,143
+"Mont Albert",59,38
+"Mont Albert North",65,15
+"Montmorency",125,60
+"Montrose",249,185
+"Moonee Ponds",79,82
+"Moorabbin",146,133
+"Mooroolbark",259,221
+"Mordialloc",205,146
+"Mount Dandenong",153,128
+"Mount Evelyn",270,214
+"Mount Waverley",124,121
+"Mulgrave",234,268
+"Murrumbeena",104,79
+"Narre Warren",289,287
+"Narre Warren North",293,303
+"Narre Warren South",316,285
+"Newport",64,42
+"Niddrie",99,181
+"Noble Park",258,161
+"Noble Park North",222,
+"North Melbourne",10,56
+"North Warrandyte",256,194
+"Northcote",40,36
+"Notting Hill",200,243
+"Nunawading",112,156
+"Oak Park",140,110
+"Oakleigh",144,103
+"Oakleigh East",206,179
+"Oakleigh South",187,182
+"Ormond",63,8
+"Park Orchards",225,160
+"Parkdale",149,25
+"Parkville",9,7
+"Pascoe Vale",163,139
+"Pascoe Vale South",179,114
+"Patterson Lakes",245,262
+"Point Cook",309,245
+"Port Melbourne",56,132
+"Prahran",30,34
+"Preston",96,145
+"Princes Hill",16,92
+"Research",254,167
+"Reservoir",158,176
+"Richmond",67,51
+"Ringwood",185,192
+"Ringwood East",172,108
+"Ringwood North",221,141
+"Ripponlea",29,17
+"Rosanna",121,177
+"Rowville",284,301
+"Roxburgh Park",302,256
+"Sandhurst",320,
+"Sandringham",27,33
+"Sassafras",134,101
+"Scoresby",193,294
+"Seabrook",299,163
+"Seaford",214,202
+"Seaholme",113,116
+"Seddon",126,49
+"Selby",175,118
+"Sherbrooke",157,215
+"Skye",321,
+"South Kingsville",209,96
+"South Melbourne",70,47
+"South Morang",273,
+"South Yarra",2,1
+"Southbank",91,68
+"Spotswood",101,157
+"Springvale",207,250
+"Springvale South",216,148
+"St Albans",253,282
+"St Helena",159,127
+"St Kilda",35,39
+"St Kilda East",14,19
+"St Kilda West",39,72
+"Strathmore",87,239
+"Strathmore Heights",127,149
+"Sunshine",97,208
+"Sunshine North",230,312
+"Surrey Hills",55,66
+"Sydenham",311,307
+"Taylors Hill",314,
+"Taylors Lakes",267,264
+"Tecoma",166,97
+"Templestowe",154,187
+"Templestowe Lower",123,85
+"The Basin",171,204
+"The Patch",257,210
+"Thomastown",211,293
+"Thornbury",52,83
+"Toorak",3,5
+"Travancore",24,52
+"Tullamarine",252,289
+"Upper Ferntree Gully",248,175
+"Upwey",164,105
+"Vermont",120,142
+"Vermont South",94,209
+"Viewbank",110,169
+"Wandin North",304,261
+"Wantirna",203,237
+"Wantirna South",184,249
+"Warrandyte",228,126
+"Warranwood",261,265
+"Waterways",301,
+"Watsonia",132,131
+"Watsonia North",170,207
+"Werribee",296,276
+"West Footscray",174,55
+"West Melbourne",61,172
+"West Sunshine",239,233
+"Westmeadows",167,234
+"Wheelers Hill",161,186
+"Williams Landing",246,
+"Williamstown",36,40
+"Williamstown North",142,180
+"Windsor",32,18
+"Yallambie",180,154
+"Yarraville",51,58

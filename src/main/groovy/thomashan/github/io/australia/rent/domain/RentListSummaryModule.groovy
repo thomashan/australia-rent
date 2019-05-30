@@ -13,7 +13,7 @@ class RentListSummaryModule extends Module {
     static content = {
         price {
             Matcher matcher = $("p.listing-result__price").text() =~ /(\d+\.?\d+)/
-            matcher.getCount() > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
+            matcher.count > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
         }
         addressLine1 {
             String address1 = $("span.address-line1").text()

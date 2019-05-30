@@ -5,7 +5,8 @@ import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.SearchQuery
 
 class RentListPage extends Page {
-    static url = "https://www.domain.com.au/rent/melbourne-region-vic/?sort=suburb-asc&excludedeposittaken=1"
+    private static final emptyString = ""
+    static url = "https://www.domain.com.au/rent"
 
     static content = {
         list {
@@ -30,12 +31,43 @@ class RentListPage extends Page {
     }
 
     String convertToPath(SearchQuery searchQuery) {
-        String maxBedrooms = getMaxBedrooms(searchQuery)
-
-        return "&price=${searchQuery.minPrice}-${searchQuery.maxPrice}&bedrooms=${searchQuery.minBedroom}-${maxBedrooms}"
+        return "/?${suburbs(searchQuery)}&sort=suburb-asc&excludedeposittaken=1${price(searchQuery)}${bedrooms(searchQuery)}"
     }
 
-    String getMaxBedrooms(SearchQuery searchQuery) {
-        return searchQuery.maxBedroom.empty ? "any" : searchQuery.maxBedroom.get().toString()
+    // in the format parkville-vic-3052
+    private static String suburbs(SearchQuery searchQuery) {
+        String suburbs = searchQuery.suburbs.empty || searchQuery.suburbs.get().empty ? "melbourne-region-vic" : searchQuery.suburbs.get().join(",")
+
+        return searchQuery.suburbs.present && searchQuery.suburbs.get().size() > 1 ? "suburb=${suburbs}" : suburbs
+    }
+
+    private static String bedrooms(SearchQuery searchQuery) {
+        switch (searchQuery) {
+            case { it.minBedroom.empty && it.maxBedroom.empty }:
+                return emptyString
+            case { !it.minBedroom.empty && !it.maxBedroom.empty }:
+                return "&bedrooms=${searchQuery.minBedroom.get()}-${searchQuery.maxBedroom.get()}"
+            case { !it.minBedroom.empty && it.maxBedroom.empty }:
+                return "&bedrooms=${searchQuery.minBedroom.get()}-any"
+            case { it.minBedroom.empty && !it.maxBedroom.empty }:
+                return "&bedrooms=0-${searchQuery.maxBedroom.get()}"
+            default:
+                throw new RuntimeException("shouldn't get here")
+        }
+    }
+
+    private static String price(SearchQuery searchQuery) {
+        switch (searchQuery) {
+            case { it.minPrice.empty && it.maxPrice.empty }:
+                return emptyString
+            case { !it.minPrice.empty && !it.maxPrice.empty }:
+                return "&price=${searchQuery.minPrice.get()}-${searchQuery.maxPrice.get()}"
+            case { !it.minPrice.empty && it.maxPrice.empty }:
+                return "&price=${searchQuery.minPrice.get()}-any"
+            case { it.minPrice.empty && !it.maxPrice.empty }:
+                return "&price=0-${searchQuery.maxPrice.get()}"
+            default:
+                throw new RuntimeException("shouldn't get here")
+        }
     }
 }

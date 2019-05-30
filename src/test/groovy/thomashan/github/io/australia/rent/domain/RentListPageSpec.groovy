@@ -55,20 +55,4 @@ class RentListPageSpec extends GebReportingSpec {
         then:
         pageEnd >= 26
     }
-
-    def "getMaxBedrooms should return correct any max bedroom value"() {
-        when:
-        def maxBedrooms = new RentListPage().getMaxBedrooms(new SearchQuery(1, 1, 1, Optional.empty()))
-
-        then:
-        maxBedrooms == "any"
-    }
-
-    def "getMaxBedrooms should return correct max bedroom value"() {
-        when:
-        def maxBedrooms = new RentListPage().getMaxBedrooms(new SearchQuery(1, 1, 1, Optional.of(1)))
-
-        then:
-        maxBedrooms == "1"
-    }
 }

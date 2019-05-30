@@ -24,6 +24,7 @@ trait Search {
 
         FileInformation latestFileInformation = fileInformationList
                 .findAll { it.fileName.matches(todaysReport.fileNamePattern) }
+                .findAll { it.fileName != todaysReport.fileName }
                 .max { it.modified }
 
         if (latestFileInformation) {

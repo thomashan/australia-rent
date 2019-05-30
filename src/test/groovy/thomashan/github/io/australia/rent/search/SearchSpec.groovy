@@ -23,6 +23,8 @@ class SearchSpec extends Specification {
         dropboxFileRepository.upload(oneEntryFile, fullPath(today.minusDays(4)))
         sleep(1000)
         dropboxFileRepository.upload(threeEntryFile, fullPath(today.minusDays(2)))
+        sleep(1000)
+        dropboxFileRepository.upload(oneEntryFile, fullPath(today))
     }
 
     def cleanupSpec() {
@@ -53,7 +55,7 @@ class SearchSpec extends Specification {
         search.bedrooms == "2+"
     }
 
-    def "getPrevious returns the latest available from fileRepository"() {
+    def "getLatest returns the latest available from fileRepository which is not today's list"() {
         given:
         Search search = new SearchImpl(new SearchQuery(200, 400, 2, empty()))
 

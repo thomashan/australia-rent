@@ -2,6 +2,9 @@ package thomashan.github.io.australia.rent.output
 
 import thomashan.github.io.australia.rent.RentDetails
 
+import static thomashan.github.io.australia.rent.output.CsvWriterHelper.h
+import static thomashan.github.io.australia.rent.output.CsvWriterHelper.q
+
 class CsvRentDetailsWriter implements RentDetailsWriter {
     private static String newline = "\n"
 
@@ -22,7 +25,7 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
     }
 
     private String getHeaderLine() {
-        return ["price", "bedrooms", "bathrooms", "parking", "address", "suburb", "state", "postcode", "latitude", "longitude"].inject { result, field -> "${result},${field}" } + newline
+        return h(["price", "bedrooms", "bathrooms", "parking", "address", "suburb", "state", "postcode", "latitude", "longitude"])
     }
 
     private String line(RentDetails r) {
@@ -30,17 +33,13 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
                 bedrooms(r),
                 bathrooms(r),
                 parking(r),
-                doubleQuotes(address(r)),
-                doubleQuotes(suburb(r)),
-                doubleQuotes(state(r)),
-                doubleQuotes(postcode(r)),
+                q(address(r)),
+                q(suburb(r)),
+                q(state(r)),
+                q(postcode(r)),
                 latitude(r),
                 longitude(r)]
                 .inject { result, field -> "${result},${field}" } + newline
-    }
-
-    private String doubleQuotes(String input) {
-        return "\"${input}\""
     }
 
     private String price(RentDetails rentDetails) {

@@ -2,16 +2,17 @@ package thomashan.github.io.australia.rent.domain
 
 import geb.spock.GebReportingSpec
 import thomashan.github.io.australia.rent.RentDetails
-import thomashan.github.io.australia.rent.SearchQuery
+import thomashan.github.io.australia.rent.search.SearchQuery
 
-import static java.util.Optional.empty
+import static java.util.Optional.empty as e
+import static java.util.Optional.of
 
 class RentListPageSpec extends GebReportingSpec {
-    private SearchQuery searchQuery = new SearchQuery(550, 600, 3, empty())
+    private SearchQuery searchQuery = new SearchQuery(e(), of(550), of(600), of(3), e())
 
     def "list only includes non ad listing"() {
         when:
-        to RentListPage
+        to RentListPage, searchQuery
 
         then:
         list.size() == 20
@@ -19,7 +20,7 @@ class RentListPageSpec extends GebReportingSpec {
 
     def "get the correct page number"() {
         when:
-        to RentListPage
+        to RentListPage, searchQuery
 
         then:
         pageNumber == 1
@@ -37,12 +38,12 @@ class RentListPageSpec extends GebReportingSpec {
         rentDetails.postcode.startsWith("3")
         rentDetails.bedrooms == 3
         rentDetails.bathrooms
-        rentDetails.parking
+        rentDetails.parking >= 0
     }
 
     def "get current page number"() {
         when:
-        to RentListPage
+        to RentListPage, searchQuery
 
         then:
         pageNumber == 1

@@ -2,7 +2,6 @@ package thomashan.github.io.australia.rent.search
 
 import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.RentRepository
-import thomashan.github.io.australia.rent.SearchQuery
 import thomashan.github.io.australia.rent.domain.RentDomainRepository
 import thomashan.github.io.australia.rent.file.FileRepository
 import thomashan.github.io.australia.rent.file.dropbox.DropboxFileRepository
@@ -14,7 +13,8 @@ import thomashan.github.io.australia.rent.report.ReportName
 
 import java.time.LocalDate
 
-import static java.util.Optional.empty
+import static java.util.Optional.empty as e
+import static java.util.Optional.of
 
 class Step1 implements Search {
     private RentRepository rentDomainRepository = new RentDomainRepository()
@@ -22,7 +22,7 @@ class Step1 implements Search {
     private CsvRentDetailsWriter csvRentDetailsWriter = new CsvRentDetailsWriter()
     private Geocoder geocoder = new GoogleGeocoder()
     private final LocalDate today = LocalDate.now()
-    final SearchQuery searchQuery = new SearchQuery(550, 650, 3, empty())
+    final SearchQuery searchQuery = new SearchQuery(e(), of(550), of(650), of(3), e())
 
     void search() {
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)

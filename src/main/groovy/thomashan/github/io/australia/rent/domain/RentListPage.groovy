@@ -2,7 +2,8 @@ package thomashan.github.io.australia.rent.domain
 
 import geb.Page
 import thomashan.github.io.australia.rent.RentDetails
-import thomashan.github.io.australia.rent.SearchQuery
+import thomashan.github.io.australia.rent.search.SearchParameterExtractor as s
+import thomashan.github.io.australia.rent.search.SearchQuery
 
 class RentListPage extends Page {
     private static final emptyString = ""
@@ -31,43 +32,21 @@ class RentListPage extends Page {
     }
 
     String convertToPath(SearchQuery searchQuery) {
-        return "/?${suburbs(searchQuery)}&sort=suburb-asc&excludedeposittaken=1${price(searchQuery)}${bedrooms(searchQuery)}"
+        return "/?${[suburbs(searchQuery), price(searchQuery), bedrooms(searchQuery), "sort=suburb-asc", "excludedeposittaken=1"].findAll { it }.join("&")}"
     }
 
     // in the format parkville-vic-3052
     private static String suburbs(SearchQuery searchQuery) {
-        String suburbs = searchQuery.suburbs.empty || searchQuery.suburbs.get().empty ? "melbourne-region-vic" : searchQuery.suburbs.get().join(",")
-
-        return searchQuery.suburbs.present && searchQuery.suburbs.get().size() > 1 ? "suburb=${suburbs}" : suburbs
+        return "suburb=${s.suburbs(searchQuery)}"
     }
 
     private static String bedrooms(SearchQuery searchQuery) {
-        switch (searchQuery) {
-            case { it.minBedroom.empty && it.maxBedroom.empty }:
-                return emptyString
-            case { !it.minBedroom.empty && !it.maxBedroom.empty }:
-                return "&bedrooms=${searchQuery.minBedroom.get()}-${searchQuery.maxBedroom.get()}"
-            case { !it.minBedroom.empty && it.maxBedroom.empty }:
-                return "&bedrooms=${searchQuery.minBedroom.get()}-any"
-            case { it.minBedroom.empty && !it.maxBedroom.empty }:
-                return "&bedrooms=0-${searchQuery.maxBedroom.get()}"
-            default:
-                throw new RuntimeException("shouldn't get here")
-        }
+        String bedrooms = s.bedrooms(searchQuery)
+        return bedrooms ? "bedrooms=${bedrooms}" : bedrooms
     }
 
     private static String price(SearchQuery searchQuery) {
-        switch (searchQuery) {
-            case { it.minPrice.empty && it.maxPrice.empty }:
-                return emptyString
-            case { !it.minPrice.empty && !it.maxPrice.empty }:
-                return "&price=${searchQuery.minPrice.get()}-${searchQuery.maxPrice.get()}"
-            case { !it.minPrice.empty && it.maxPrice.empty }:
-                return "&price=${searchQuery.minPrice.get()}-any"
-            case { it.minPrice.empty && !it.maxPrice.empty }:
-                return "&price=0-${searchQuery.maxPrice.get()}"
-            default:
-                throw new RuntimeException("shouldn't get here")
-        }
+        String price = s.prices(searchQuery)
+        return price ? "price=${price}" : price
     }
 }

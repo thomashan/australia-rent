@@ -22,7 +22,7 @@ class Step1 implements Search {
     private CsvRentDetailsWriter csvRentDetailsWriter = new CsvRentDetailsWriter()
     private Geocoder geocoder = new GoogleGeocoder()
     private final LocalDate today = LocalDate.now()
-    final SearchQuery searchQuery = new SearchQuery(e(), of(550), of(650), of(3), e())
+    final SearchQuery searchQuery = new SearchQuery(e(), of(700), of(750), of(3), of(3))
 
     void search() {
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)

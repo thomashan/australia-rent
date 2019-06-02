@@ -23,7 +23,15 @@ class DropboxFileRepositorySpec extends Specification {
         dropboxFileRepository.read(fileName) != null
     }
 
-    def "should list files"() {
+    def "list should return empty fileInformation if directory does not exist"() {
+        when:
+        List<FileInformation> files = dropboxFileRepository.list("${basePath}1")
+
+        then:
+        files.empty
+    }
+
+    def "list should list files"() {
         String fileName = "${basePath}/test.csv"
         File file = new File(this.class.getResource("/rent_details.csv").toURI())
         dropboxFileRepository.upload(file, fileName)

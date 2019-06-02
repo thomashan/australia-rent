@@ -17,14 +17,20 @@ before_install:
   - rvm install 2.2.6
   - gem install dropbox-deployment
 
+stages:
+  - test
+  - name: run
+    if: branch = master
+
 jobs:
   include:
     - stage: test
       script:
         - xvfb-run ./gradlew --scan -i build jacocoTestReport
-    - stage: deploy
+    - stage: run
       script:
         - xvfb-run ./gradlew --scan -i run
+
 
 after_failure:
   - ./dropbox-deployment.sh

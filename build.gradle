@@ -1,6 +1,7 @@
 plugins {
     id "com.gradle.build-scan" version "2.1"
     id "com.github.erdi.webdriver-binaries" version "2.1"
+    id "application"
 }
 
 buildScan {
@@ -56,6 +57,7 @@ dependencies {
 }
 
 webdriverBinaries {
+    configureTask(run)
     chromedriver "74.0.3729.6"
     geckodriver "0.24.0"
 }
@@ -77,4 +79,8 @@ test {
         events "failed"
         exceptionFormat "full"
     }
+}
+
+application {
+    mainClassName = "thomashan.github.io.australia.rent.search.SearchApp"
 }

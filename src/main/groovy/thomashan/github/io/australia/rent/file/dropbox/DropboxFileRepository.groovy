@@ -67,12 +67,17 @@ class DropboxFileRepository implements FileRepository {
 
     @Override
     List<FileInformation> list(String directory) {
-        ListFolderResult listFolderResult = client.files().listFolder(directory)
-        List<Metadata> metadata = listFolderResult.entries
-        List<FileMetadata> fileMetadata = metadata.findAll { it instanceof FileMetadata }
+        try {
+            ListFolderResult listFolderResult = client.files().listFolder(directory)
+            List<Metadata> metadata = listFolderResult.entries
 
-        return fileMetadata.collect { FileMetadata f ->
-            new FileInformation(f.pathDisplay, f.name, f.serverModified.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+            List<FileMetadata> fileMetadata = metadata.findAll { it instanceof FileMetadata }
+
+            return fileMetadata.collect { FileMetadata f ->
+                new FileInformation(f.pathDisplay, f.name, f.serverModified.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime())
+            }
+        } catch (ListFolderErrorException ex) {
+            return []
         }
     }
 

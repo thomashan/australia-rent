@@ -39,6 +39,7 @@ class RentDomainRepository implements RentRepository {
         try {
             return rentListPage.rentDetails
         } catch (Exception ex) {
+            ex.printStackTrace()
             rentListPage.driver.navigate().refresh()
 
             return getRentDetails(rentListPage)

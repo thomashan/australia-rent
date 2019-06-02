@@ -37,7 +37,7 @@ class RentListPageSpec extends GebReportingSpec {
         rentDetails.postcode.startsWith("3")
         rentDetails.bedrooms == 3
         rentDetails.bathrooms
-        rentDetails.parking
+        rentDetails.parking >= 0
     }
 
     def "get current page number"() {

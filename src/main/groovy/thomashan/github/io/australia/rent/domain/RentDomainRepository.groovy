@@ -32,7 +32,24 @@ class RentDomainRepository implements RentRepository {
         println("start: ${start}, end: ${end}")
         println("duration ${Duration.between(start, end)}")
 
-        return result
+        return filterResultsWithSearchQuery(result, searchQuery)
+    }
+
+    private static List<RentDetails> filterResultsWithSearchQuery(List<RentDetails> rentDetails, SearchQuery searchQuery) {
+        return rentDetails.findAll { include(it, searchQuery) }
+    }
+
+    private static boolean include(RentDetails rentDetails, SearchQuery searchQuery) {
+        switch (rentDetails) {
+            case { it.price.empty }:
+                return true
+            case { searchQuery.minPrice.present && searchQuery.minPrice.get() > it.price.get() }:
+                return false
+            case { searchQuery.maxPrice.present && searchQuery.maxPrice.get() < it.price.get() }:
+                return false
+            default:
+                return true
+        }
     }
 
     private List<RentDetails> getRentDetails(RentListPage rentListPage) {

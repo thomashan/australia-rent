@@ -3,7 +3,7 @@ package thomashan.github.io.australia.rent.domain
 import geb.Browser
 import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.RentRepository
-import thomashan.github.io.australia.rent.SearchQuery
+import thomashan.github.io.australia.rent.search.SearchQuery
 
 import java.time.Duration
 import java.time.LocalDateTime

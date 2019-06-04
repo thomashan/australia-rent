@@ -1,13 +1,16 @@
 package thomashan.github.io.australia.rent.report
 
 import spock.lang.Specification
-import thomashan.github.io.australia.rent.SearchQuery
 import thomashan.github.io.australia.rent.search.Search
+import thomashan.github.io.australia.rent.search.SearchQuery
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.regex.Matcher
 import java.util.regex.Pattern
+
+import static java.util.Optional.empty as e
+import static java.util.Optional.of
 
 class ReportNameSpec extends Specification {
     private Search search = new SearchImpl()
@@ -20,7 +23,7 @@ class ReportNameSpec extends Specification {
         ReportName reportName = new ReportName(search, today)
 
         then:
-        reportName.fullPath == "/test/prices_200-400_bedrooms_2+/${fileName}.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}.csv"
     }
 
     def "fullPath with suffix"() {
@@ -28,7 +31,7 @@ class ReportNameSpec extends Specification {
         ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
 
         then:
-        reportName.fullPath == "/test/prices_200-400_bedrooms_2+/${fileName}_suffix.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}_suffix.csv"
     }
 
     def "fileName without suffix"() {
@@ -85,7 +88,7 @@ class ReportNameSpec extends Specification {
     private static final class SearchImpl implements Search {
         @Override
         SearchQuery getSearchQuery() {
-            return new SearchQuery(200, 400, 2, Optional.empty())
+            return new SearchQuery(e(), of(200), of(400), of(2), e())
         }
 
         @Override
@@ -95,7 +98,7 @@ class ReportNameSpec extends Specification {
 
         @Override
         String getName() {
-            return "test/prices_${prices}_bedrooms_${bedrooms}"
+            return "test/${[prices, bedrooms].findAll { it }.join("_")}"
         }
     }
 }

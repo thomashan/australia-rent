@@ -2,10 +2,12 @@ package thomashan.github.io.australia.rent.domain
 
 import geb.Page
 import thomashan.github.io.australia.rent.RentDetails
-import thomashan.github.io.australia.rent.SearchQuery
+import thomashan.github.io.australia.rent.search.SearchParameterExtractor as s
+import thomashan.github.io.australia.rent.search.SearchQuery
 
 class RentListPage extends Page {
-    static url = "https://www.domain.com.au/rent/melbourne-region-vic/?sort=suburb-asc&excludedeposittaken=1"
+    private static final emptyString = ""
+    static url = "https://www.domain.com.au/rent"
 
     static content = {
         list {
@@ -30,12 +32,21 @@ class RentListPage extends Page {
     }
 
     String convertToPath(SearchQuery searchQuery) {
-        String maxBedrooms = getMaxBedrooms(searchQuery)
-
-        return "&price=${searchQuery.minPrice}-${searchQuery.maxPrice}&bedrooms=${searchQuery.minBedroom}-${maxBedrooms}"
+        return "/?${[suburbs(searchQuery), price(searchQuery), bedrooms(searchQuery), "sort=suburb-asc", "excludedeposittaken=1"].findAll { it }.join("&")}"
     }
 
-    String getMaxBedrooms(SearchQuery searchQuery) {
-        return searchQuery.maxBedroom.empty ? "any" : searchQuery.maxBedroom.get().toString()
+    // in the format parkville-vic-3052
+    private static String suburbs(SearchQuery searchQuery) {
+        return "suburb=${s.suburbs(searchQuery)}"
+    }
+
+    private static String bedrooms(SearchQuery searchQuery) {
+        String bedrooms = s.bedrooms(searchQuery)
+        return bedrooms ? "bedrooms=${bedrooms}" : bedrooms
+    }
+
+    private static String price(SearchQuery searchQuery) {
+        String price = s.prices(searchQuery)
+        return price ? "price=${price}" : price
     }
 }

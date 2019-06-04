@@ -1,7 +1,6 @@
 package thomashan.github.io.australia.rent.search
 
 import thomashan.github.io.australia.rent.RentDetails
-import thomashan.github.io.australia.rent.SearchQuery
 import thomashan.github.io.australia.rent.file.FileInformation
 import thomashan.github.io.australia.rent.file.FileRepository
 import thomashan.github.io.australia.rent.file.dropbox.DropboxFileRepository
@@ -41,18 +40,16 @@ trait Search {
     }
 
     String getName() {
-        return "prices_${prices}_bedrooms_${bedrooms}"
+        return [prices, bedrooms].findAll { it }.join("_")
     }
 
     String getPrices() {
-        return "${searchQuery.minPrice}-${searchQuery.maxPrice}"
+        String prices = SearchParameterExtractor.prices(searchQuery)
+        return prices ? "prices_${prices}" : prices
     }
 
     String getBedrooms() {
-        if (searchQuery.maxBedroom.isEmpty()) {
-            return "${searchQuery.minBedroom}+"
-        }
-
-        return "${searchQuery.minBedroom}-${searchQuery.maxBedroom.get()}"
+        String bedrooms = SearchParameterExtractor.bedrooms(searchQuery)
+        return bedrooms ? "bedrooms_${bedrooms}" : bedrooms
     }
 }

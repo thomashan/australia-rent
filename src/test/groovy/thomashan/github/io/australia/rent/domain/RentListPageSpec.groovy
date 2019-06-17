@@ -8,7 +8,7 @@ import static java.util.Optional.empty as e
 import static java.util.Optional.of
 
 class RentListPageSpec extends GebReportingSpec {
-    private SearchQuery searchQuery = new SearchQuery(e(), of(550), of(600), of(3), e())
+    private SearchQuery searchQuery = new SearchQuery(e(), of(550), of(600), of(3), of(3))
 
     def "list only includes non ad listing"() {
         when:

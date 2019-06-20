@@ -57,7 +57,9 @@ class RentDomainRepository implements RentRepository {
             return rentListPage.rentDetails
         } catch (Exception ex) {
             ex.printStackTrace()
-            rentListPage.driver.navigate().refresh()
+            String currentUrl = rentListPage.driver.currentUrl
+            println("Error! Refreshing page: [currentUrl: ${currentUrl}]")
+            rentListPage.browser.go(currentUrl)
 
             return getRentDetails(rentListPage)
         }

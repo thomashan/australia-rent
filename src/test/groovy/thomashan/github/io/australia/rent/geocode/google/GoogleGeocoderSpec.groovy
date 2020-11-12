@@ -17,8 +17,8 @@ class GoogleGeocoderSpec extends Specification {
         RentDetails resultantRentDetails1 = resultantRentDetails[0]
 
         then:
-        resultantRentDetails1.coordinates.get().latitude == -37.887699
-        resultantRentDetails1.coordinates.get().longitude == 145.152062
+        resultantRentDetails1.coordinates.get().latitude == -37.8877464
+        resultantRentDetails1.coordinates.get().longitude == 145.1520288
     }
 
     def "should populate latitude and longitude if initial latitude longitude is empty"() {

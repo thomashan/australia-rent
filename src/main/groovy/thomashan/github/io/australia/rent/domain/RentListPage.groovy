@@ -13,7 +13,7 @@ class RentListPage extends Page {
         list {
             $("ul[data-testid='results']").$("li[data-testid]").moduleList(RentListSummaryModule)
         }
-        pageNumber { $("a.paginator__page-button.is-current").text() as Integer }
+        pageNumber { $("span[data-testid='paginator-page-button']").text() as Integer }
         pageEnd { $("div.paginator__pages a.paginator__page-button").last().text() as Integer }
     }
 

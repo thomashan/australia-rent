@@ -54,6 +54,6 @@ class RentListPageSpec extends GebReportingSpec {
         to RentListPage, searchQuery
 
         then:
-        pageEnd >= 10
+        pageEnd == 5
     }
 }

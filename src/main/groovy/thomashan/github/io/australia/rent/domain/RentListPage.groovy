@@ -14,7 +14,7 @@ class RentListPage extends Page {
             $("ul[data-testid='results']").$("li[data-testid]").moduleList(RentListSummaryModule)
         }
         pageNumber { $("span[data-testid='paginator-page-button']").text() as Integer }
-        pageEnd { $("div.paginator__pages a.paginator__page-button").last().text() as Integer }
+        pageEnd { $("a[data-testid='paginator-page-button']").last().text() as Integer }
     }
 
     List<RentDetails> getRentDetails() {

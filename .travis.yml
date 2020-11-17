@@ -14,7 +14,7 @@ addons:
 
 before_install:
   - export DISPLAY=:0
-  - rvm install 2.2.6
+  - rvm install 2.7.0
   - gem install dropbox-deployment
 
 stages:

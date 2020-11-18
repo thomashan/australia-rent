@@ -6,37 +6,34 @@ import geb.navigator.Navigator
 import java.util.regex.Matcher
 
 class RentListSummaryModule extends Module {
-    private static final BEDROOMS = "Bed"
+    private static final EMPTY = ""
+    private static final COMMA = ""
+    private static final BEDROOMS = "Beds"
     private static final BATHROOMS = "Bath"
     private static final PARKING = "Parking"
 
     static content = {
         price {
-            Matcher matcher = $("p.listing-result__price").text() =~ /(\d+\.?\d+)/
-            matcher.count > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
+            Matcher matcher = $("p[data-testid='listing-card-price']").text() =~ /(\d+\.?\d+)/
+            return matcher.count > 0 ? Optional.of(matcher[0][0] as BigDecimal) : Optional.empty()
         }
         addressLine1 {
-            String address1 = $("span.address-line1").text()
-            return address1 ? address1?.strip() - "," : ""
+            String address1 = $("span[data-testid='address-line1']").text()
+            return address1 ? address1?.strip() - COMMA : EMPTY
         }
-        suburb {
-            String suburb = $("span.address-line2 span[itemprop='addressLocality']").text()
-            println("suburb: ${suburb}")
-
-            return suburb
-        }
-        state { $("span.address-line2 span[itemprop='addressRegion']").text() }
-        postcode { $("span.address-line2 span[itemprop='postalCode']").text() }
+        suburb { $("span[itemprop='addressLocality']").text() }
+        state { $("span[itemprop='addressRegion']").text() }
+        postcode { $("span[itemprop='postalCode']").text() }
         bedrooms {
-            Navigator bedroomElements = $("span.property-features__feature-text", text: contains(BEDROOMS))
+            Navigator bedroomElements = $("span[data-testid='property-features-text']", text: contains(BEDROOMS))
             return getValue(bedroomElements)
         }
         bathrooms {
-            Navigator bathroomElements = $("span.property-features__feature-text", text: contains(BATHROOMS))
+            Navigator bathroomElements = $("span[data-testid='property-features-text']", text: contains(BATHROOMS))
             return getValue(bathroomElements)
         }
         parking {
-            Navigator parkingElements = $("span.property-features__feature-text", text: contains(PARKING))
+            Navigator parkingElements = $("span[data-testid='property-features-text']", text: contains(PARKING))
             return getValue(parkingElements)
         }
 

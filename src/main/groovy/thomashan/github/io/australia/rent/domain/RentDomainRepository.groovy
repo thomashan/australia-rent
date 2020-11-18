@@ -17,14 +17,16 @@ class RentDomainRepository implements RentRepository {
             to RentListPage, searchQuery
             RentListPage rentListPage = (RentListPage) page
 
+            int pageNumber = rentListPage.pageNumber
             int pageEnd = rentListPage.pageEnd
 
-            (1..pageEnd).each { pageNumber ->
+            while (pageNumber <= pageEnd) {
                 RentListPage currentPage = to(RentListPage, searchQuery, page: pageNumber)
                 println("currentUrl: ${currentUrl}")
 
                 List<RentDetails> rentailDetails = getRentDetails(currentPage)
                 result = result + rentailDetails
+                pageNumber++
             }
         }
 

@@ -1,6 +1,7 @@
 package thomashan.github.io.australia.rent.domain
 
 import geb.Page
+import geb.navigator.Navigator
 import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.search.SearchParameterExtractor as s
 import thomashan.github.io.australia.rent.search.SearchQuery
@@ -13,8 +14,11 @@ class RentListPage extends Page {
         list {
             $("ul[data-testid='results']").$("li[data-testid]").moduleList(RentListSummaryModule)
         }
-        pageNumber { $("a.paginator__page-button.is-current").text() as Integer }
-        pageEnd { $("div.paginator__pages a.paginator__page-button").last().text() as Integer }
+        pageNumber { $("span[data-testid='paginator-page-button']").text() as Integer }
+        pageEnd {
+            Navigator navigator = $("a[data-testid='paginator-page-button']")
+            return !navigator.empty ? navigator.last().text() as Integer : 1
+        }
     }
 
     List<RentDetails> getRentDetails() {

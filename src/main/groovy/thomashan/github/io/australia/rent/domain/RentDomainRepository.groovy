@@ -26,6 +26,7 @@ class RentDomainRepository implements RentRepository {
 
                 List<RentDetails> rentailDetails = getRentDetails(currentPage)
                 result = result + rentailDetails
+                pageEnd = currentPage.pageEnd
                 pageNumber++
             }
         }

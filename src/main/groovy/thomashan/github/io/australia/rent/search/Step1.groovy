@@ -13,16 +13,18 @@ import thomashan.github.io.australia.rent.report.ReportName
 
 import java.time.LocalDate
 
-import static java.util.Optional.empty as e
-import static java.util.Optional.of
-
 class Step1 implements Search {
     private RentRepository rentDomainRepository = new RentDomainRepository()
     private FileRepository fileRepository = new DropboxFileRepository()
     private CsvRentDetailsWriter csvRentDetailsWriter = new CsvRentDetailsWriter()
     private Geocoder geocoder = new GoogleGeocoder()
     private final LocalDate today = LocalDate.now()
-    final SearchQuery searchQuery = new SearchQuery(e(), of(700), of(750), of(3), of(3))
+    final SearchQuery searchQuery
+
+    Step1(SearchQuery searchQuery) {
+        this.searchQuery = searchQuery
+    }
+
 
     void search() {
         List<RentDetails> rentDetails = rentDomainRepository.findAll(searchQuery)

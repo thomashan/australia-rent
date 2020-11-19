@@ -24,6 +24,14 @@ class RentDomainRepositorySpec extends GebReportingSpec {
         }
     }
 
+    def "get all listing should iterate through all pages"() {
+        when:
+        List<RentDetails> rentDetails = rentDomainRepository.findAll(new SearchQuery(e(), of(500), of(750), of(3), e()))
+
+        then:
+        rentDetails.size() > 100
+    }
+
     def "filterResultsWithSearchQuery should include rent details without price"() {
         given:
         SearchQuery searchQuery = new SearchQuery(e(), of(4500), of(5000), of(3), e())

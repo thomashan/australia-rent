@@ -24,8 +24,8 @@ class RentDomainRepository implements RentRepository {
                 RentListPage currentPage = to(RentListPage, searchQuery, page: pageNumber)
                 println("currentUrl: ${currentUrl}")
 
-                List<RentDetails> rentailDetails = getRentDetails(currentPage)
-                result = result + rentailDetails
+                List<RentDetails> rentDetails = getRentDetails(currentPage)
+                result = result + rentDetails
                 pageEnd = currentPage.pageEnd
                 pageNumber++
             }

@@ -18,7 +18,7 @@ final class SearchParameterExtractor {
             case { !it.minBedroom.empty && !it.maxBedroom.empty }:
                 return "${searchQuery.minBedroom.get()}-${searchQuery.maxBedroom.get()}"
             case { !it.minBedroom.empty && it.maxBedroom.empty }:
-                return "${searchQuery.minBedroom.get()}-any"
+                return "${searchQuery.minBedroom.get()}+"
             case { it.minBedroom.empty && !it.maxBedroom.empty }:
                 return "0-${searchQuery.maxBedroom.get()}"
             default:
@@ -33,7 +33,7 @@ final class SearchParameterExtractor {
             case { !it.minPrice.empty && !it.maxPrice.empty }:
                 return "${searchQuery.minPrice.get()}-${searchQuery.maxPrice.get()}"
             case { !it.minPrice.empty && it.maxPrice.empty }:
-                return "${searchQuery.minPrice.get()}-any"
+                return "${searchQuery.minPrice.get()}+"
             case { it.minPrice.empty && !it.maxPrice.empty }:
                 return "0-${searchQuery.maxPrice.get()}"
             default:

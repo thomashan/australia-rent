@@ -23,7 +23,7 @@ class ReportNameSpec extends Specification {
         ReportName reportName = new ReportName(search, today)
 
         then:
-        reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2+/${fileName}.csv"
     }
 
     def "fullPath with suffix"() {
@@ -31,7 +31,7 @@ class ReportNameSpec extends Specification {
         ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
 
         then:
-        reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}_suffix.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2+/${fileName}_suffix.csv"
     }
 
     def "fileName without suffix"() {

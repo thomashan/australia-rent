@@ -7,7 +7,7 @@ import java.util.regex.Matcher
 
 class RentListSummaryModule extends Module {
     private static final EMPTY = ""
-    private static final COMMA = ""
+    private static final COMMA = ","
     private static final BEDROOMS = "Beds"
     private static final BATHROOMS = "Bath"
     private static final PARKING = "Parking"

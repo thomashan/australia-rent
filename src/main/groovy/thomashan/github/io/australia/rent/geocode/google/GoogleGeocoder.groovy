@@ -3,6 +3,7 @@ package thomashan.github.io.australia.rent.geocode.google
 
 import com.google.maps.GeoApiContext
 import com.google.maps.GeocodingApi
+import com.google.maps.errors.OverQueryLimitException
 import com.google.maps.model.GeocodingResult
 import thomashan.github.io.australia.rent.LatLongCoordinates
 import thomashan.github.io.australia.rent.RentDetails
@@ -36,15 +37,19 @@ class GoogleGeocoder implements Geocoder {
                 println("Geocoding: ${fullAddress}")
                 GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, fullAddress).await()
 
-                switch (geocodingResults.size()) {
-                    case 0:
-                        println("Failed to geocode ${fullAddress}")
-                        return it
-                    default:
-                        GeocodingResult geocodingResult = geocodingResults[0]
-                        LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
+                try {
+                    switch (geocodingResults.size()) {
+                        case 0:
+                            println("Failed to geocode ${fullAddress}")
+                            return it
+                        default:
+                            GeocodingResult geocodingResult = geocodingResults[0]
+                            LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
 
-                        return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
+                            return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
+                    }
+                } catch (OverQueryLimitException e) {
+                    return it
                 }
             }
         }

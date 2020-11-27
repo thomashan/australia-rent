@@ -37,7 +37,7 @@ class GoogleGeocoder implements Geocoder {
                 println("Geocoding: ${fullAddress}")
 
                 try {
-                    GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, fullAddress).await()
+                    GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, fullAddress).awaitIgnoreError()
                     switch (geocodingResults.size()) {
                         case 0:
                             println("Failed to geocode ${fullAddress}")

@@ -37,7 +37,7 @@ class Step1 implements Search {
 
         File deletedEntriesReportFile = csvRentDetailsWriter.file(oldRentDetails)
         File newEntriesReportFile = csvRentDetailsWriter.file(newRentDetails)
-        File commonEntriesReportFile = csvRentDetailsWriter(commonRentDetails)
+        File commonEntriesReportFile = csvRentDetailsWriter.file(commonRentDetails)
         File reportFile = csvRentDetailsWriter.file(commonRentDetails + newRentDetails)
 
         fileRepository.upload(reportFile, new ReportName(this, today).fullPath)

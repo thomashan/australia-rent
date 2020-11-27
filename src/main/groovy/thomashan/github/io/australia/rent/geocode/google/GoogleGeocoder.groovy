@@ -49,6 +49,7 @@ class GoogleGeocoder implements Geocoder {
                             return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
                     }
                 } catch (OverQueryLimitException e) {
+                    println("OverQueryLimitException ${fullAddress}")
                     return it
                 }
             }

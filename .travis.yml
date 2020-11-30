@@ -7,7 +7,7 @@ env:
   - MOZ_HEADLESS=1
 
 addons:
-  firefox: "66.0.5"
+  firefox: "83.0"
   chrome: stable
   sonarcloud:
     organization: "thomashan-github"
@@ -16,6 +16,7 @@ before_install:
   - export DISPLAY=:0
   - rvm install 2.7.0
   - gem install dropbox-deployment
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 
 stages:
   - test

@@ -38,15 +38,20 @@ class GoogleGeocoder implements Geocoder {
 
                 try {
                     GeocodingResult[] geocodingResults = GeocodingApi.geocode(geoApiContext, fullAddress).awaitIgnoreError()
-                    switch (geocodingResults.size()) {
-                        case 0:
-                            println("Failed to geocode ${fullAddress}")
-                            return it
-                        default:
-                            GeocodingResult geocodingResult = geocodingResults[0]
-                            LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
+                    if (geocodingResults) {
+                        switch (geocodingResults.size()) {
+                            case 0:
+                                println("Failed to geocode ${fullAddress}")
+                                return it
+                            default:
+                                GeocodingResult geocodingResult = geocodingResults[0]
+                                LatLongCoordinates latLongCoordinates = new LatLongCoordinates(geocodingResult.geometry.location.lat, geocodingResult.geometry.location.lng)
 
-                            return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
+                                return new RentDetails(it.price, it.address, it.suburb, it.state, it.postcode, it.bedrooms, it.bathrooms, it.parking, Optional.of(latLongCoordinates))
+                        }
+                    } else {
+                        println("Failed to geocode ${fullAddress}")
+                        return it
                     }
                 } catch (OverQueryLimitException e) {
                     println("OverQueryLimitException ${fullAddress}")

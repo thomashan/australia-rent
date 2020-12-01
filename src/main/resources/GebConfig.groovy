@@ -19,6 +19,7 @@ import thomashan.github.io.australia.rent.geb.FullPageScreenshotReporter
 driver = {
     ChromeOptions chromeOptions = new ChromeOptions()
     chromeOptions.setHeadless(true)
+    chromeOptions.addArguments("user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:83.0) Gecko/20100101 Firefox/83.0")
 
     WebDriver webDriver = new ChromeDriver(chromeOptions)
     webDriver.manage().window().setSize(new Dimension(1920, 1080))

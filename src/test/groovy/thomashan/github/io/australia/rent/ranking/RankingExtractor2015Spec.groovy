@@ -5,7 +5,7 @@ import spock.lang.Specification
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class RankingExtractorSpec extends Specification {
+class RankingExtractor2015Spec extends Specification {
     private Pattern pattern = Pattern.compile("(?ms)Ranked:\\s?(\\d+)(?:(?:.*)(?:Previous rank)(?:ing)?:\\s?(\\d+|–))?")
 //    private Pattern pattern = Pattern.compile("(?ms)Ranked:\\s?(\\d+).*(?:Previous rank(ing)?:\\s?)(\\d|–)")
 

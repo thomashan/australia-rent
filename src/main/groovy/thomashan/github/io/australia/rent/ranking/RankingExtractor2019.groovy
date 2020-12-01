@@ -6,7 +6,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
 import static thomashan.github.io.australia.rent.output.CsvWriterHelper.*
 
-// used to generate /resource/data/ranking/suburb/2015_rankings.csv
+// used to generate /resource/data/ranking/suburb/2019_rankings.csv
 class RankingExtractor2019 {
     static void main(String[] args) {
         RankingExtractor2019 rankingExtractor = new RankingExtractor2019()

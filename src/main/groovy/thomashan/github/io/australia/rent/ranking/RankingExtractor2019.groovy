@@ -4,14 +4,12 @@ import geb.Browser
 import groovy.transform.ToString
 import org.openqa.selenium.htmlunit.HtmlUnitDriver
 
-import java.util.regex.Matcher
-
 import static thomashan.github.io.australia.rent.output.CsvWriterHelper.*
 
-// used to generate /resource/data/ranking/suburb/rankings.csv
-class RankingExtractor {
+// used to generate /resource/data/ranking/suburb/2019_rankings.csv
+class RankingExtractor2019 {
     static void main(String[] args) {
-        RankingExtractor rankingExtractor = new RankingExtractor()
+        RankingExtractor2019 rankingExtractor = new RankingExtractor2019()
 
         rankingExtractor.extractSuburbRankings()
     }
@@ -19,25 +17,28 @@ class RankingExtractor {
     void extractSuburbRankings() {
         Browser.drive {
             driver = new HtmlUnitDriver()
-            go("https://www.domain.com.au/news/melbournes-321-suburbs-ranked-for-liveability-20151106-gkq447/")
+            go("https://www.domain.com.au/liveable-melbourne/melbournes-most-liveable-suburbs-2019/melbournes-307-suburbs-ranked-for-liveability-2019-898676/")
 
-            List<String> suburbs = $("h3")*.text()
-            suburbs.removeAll {
-                it.startsWith("Ranked") || it.startsWith("Previous") || it.startsWith("Article Search") || it.startsWith("Get the latest updates with our newsletter")
+            List<String> suburbsWithRanking = $("h3")*.text()
+            suburbsWithRanking.removeAll {
+                !it.matches("^([\\d])+\\..*")
             }
 
-            List<SuburbRanking> suburbRankings = suburbs.collect { String suburb ->
-                String rankings = $("h3", text: suburb).next().text()
-                Matcher matcher = rankings =~ /(?ms)Ranked:\s?(\d+)(?:(?:.*)(?:Previous rank)(?:ing)?:\s?(\d+|–))?/
-                assert matcher.count > 0
-                List<String> results = matcher[0]
-                Integer ranking = results[1].toInteger()
-                Optional previousRanking = results[2] && results[2].isInteger() ? Optional.of(results[2].toInteger()) : Optional.empty()
-
-                new SuburbRanking(suburb: suburb, ranking: ranking, previousRanking: previousRanking)
+            List<SuburbRanking> suburbRankings = suburbsWithRanking.collect { String suburbWithRanking ->
+                int ranking = (suburbWithRanking.find(/^\d+\.\s/) - ". ").toInteger()
+                String suburb = suburbWithRanking.replaceFirst(/^\d+\.\s/, "").strip()
+                String previousRankingString = $("h3", text: suburbWithRanking).next().text()
+                if (previousRankingString.startsWith("Previous rank: ")) {
+                    Optional<Integer> previousRanking = (previousRankingString - "Previous rank: ").isInteger() ? Optional.of((previousRankingString - "Previous rank: ").toInteger()) : Optional.empty()
+                    new SuburbRanking(suburb: suburb, ranking: ranking, previousRanking: previousRanking)
+                } else if (previousRankingString.startsWith("Previous ranking: ")) {
+                    new SuburbRanking(suburb: suburb, ranking: ranking, previousRanking: Optional.of((previousRankingString - "Previous ranking: ").toInteger()))
+                } else {
+                    new SuburbRanking(suburb: suburb, ranking: ranking, previousRanking: Optional.empty())
+                }
             }
 
-            Integer threshold = 100
+            int threshold = 100
             List<SuburbRanking> goodSuburbs = suburbRankings.findAll {
                 it.ranking < threshold || (it.previousRanking.present && it.previousRanking.get() < 100)
             }
@@ -46,7 +47,6 @@ class RankingExtractor {
             goodSuburbs.sort { it.ranking }.each { println(it) }
             println("previous good suburb")
             goodSuburbs.findAll { it.previousRanking.present }.sort { it.previousRanking.get() }.each { println(it) }
-
 
             print(getHeaderLine())
             suburbRankings.each {

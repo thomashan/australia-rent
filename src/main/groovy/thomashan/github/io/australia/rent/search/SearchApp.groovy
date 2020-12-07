@@ -1,16 +1,27 @@
 package thomashan.github.io.australia.rent.search
 
 import static java.util.Optional.empty as e
-import static java.util.Optional.of
 
 class SearchApp {
     static void main(String[] args) {
-        new Step1(new SearchQuery(e(), of(400), of(450), of(3), of(3))).search()
-        new Step1(new SearchQuery(e(), of(450), of(500), of(3), of(3))).search()
-        new Step1(new SearchQuery(e(), of(500), of(550), of(3), of(3))).search()
-        new Step1(new SearchQuery(e(), of(550), of(600), of(3), of(3))).search()
-        new Step1(new SearchQuery(e(), of(600), of(650), of(3), of(3))).search()
-        new Step1(new SearchQuery(e(), of(650), of(700), of(3), of(3))).search()
-        new Step1(new SearchQuery(e(), of(700), of(750), of(3), e())).search()
+        new Step1(new SearchQuery(e(), getMinPrice(args), getMaxPrice(args), getMinBedrooms(args), getMaxBedrooms(args))).search()
+    }
+
+    private static Optional<Integer> getMinPrice(String[] args) {
+        return Optional.of(args[0].split("-")[0].toInteger())
+    }
+
+    private static Optional<Integer> getMaxPrice(String[] args) {
+        String[] results = args[0].split("-")
+        return results.length == 2 ? Optional.of(results[1].toInteger()) : Optional.empty()
+    }
+
+    private static Optional<Integer> getMinBedrooms(String[] args) {
+        return Optional.of(args[1].split("-")[0])
+    }
+
+    private static Optional<Integer> getMaxBedrooms(String[] args) {
+        String[] results = args[1].split("-")
+        return results.length == 2 ? Optional.of(results[1].toInteger()) : Optional.empty()
     }
 }

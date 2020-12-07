@@ -31,13 +31,18 @@ jobs:
     - stage: run
       script:
         - xvfb-run ./gradlew --scan -i run --args "400-450 3-3"
+    - script:
         - xvfb-run ./gradlew --scan -i run --args "450-500 3-3"
+    - script:
         - xvfb-run ./gradlew --scan -i run --args "500-550 3-3"
+    - script:
         - xvfb-run ./gradlew --scan -i run --args "550-600 3-3"
+    - script:
         - xvfb-run ./gradlew --scan -i run --args "600-650 3-3"
+    - script:
         - xvfb-run ./gradlew --scan -i run --args "650-700 3-3"
+    - script:
         - xvfb-run ./gradlew --scan -i run --args "700-750 3-"
-
 
 after_failure:
   - ./dropbox-deployment.sh

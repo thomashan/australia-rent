@@ -52,7 +52,7 @@ class SearchParameterExtractorSpec extends Specification {
         String bedrooms = s.bedrooms(new SearchQuery(e(), e(), e(), of(1), e()))
 
         then:
-        bedrooms == "1+"
+        bedrooms == "1-any"
     }
 
     def "bedrooms minBedroom defined and maxBedroom defined"() {

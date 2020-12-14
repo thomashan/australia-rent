@@ -18,7 +18,7 @@ final class SearchParameterExtractor {
             case { !it.minBedroom.empty && !it.maxBedroom.empty }:
                 return "${searchQuery.minBedroom.get()}-${searchQuery.maxBedroom.get()}"
             case { !it.minBedroom.empty && it.maxBedroom.empty }:
-                return "${searchQuery.minBedroom.get()}+"
+                return "${searchQuery.minBedroom.get()}-any"
             case { it.minBedroom.empty && !it.maxBedroom.empty }:
                 return "0-${searchQuery.maxBedroom.get()}"
             default:

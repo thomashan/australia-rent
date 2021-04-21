@@ -1,0 +1,18 @@
+{
+  "drivers": [
+    {
+      "name": "chromedriver",
+      "platform": "linux",
+      "bit": "64",
+      "version": "90.0.4430.24",
+      "url": "https://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip"
+    },
+    {
+      "name": "geckodriver",
+      "platform": "linux",
+      "bit": "64",
+      "version": "0.29.0",
+      "url": "https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz"
+    }
+  ]
+}

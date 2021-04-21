@@ -98,7 +98,7 @@ class ReportNameSpec extends Specification {
 
         @Override
         String getName() {
-            return "test/${[prices, bedrooms].findAll { it }.join("_")}"
+            return "test/${[getPrices(), getBedrooms()].findAll { it }.join("_")}"
         }
     }
 }

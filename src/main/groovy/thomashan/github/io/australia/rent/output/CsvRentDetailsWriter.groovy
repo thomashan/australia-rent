@@ -11,7 +11,6 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
     @Override
     File file(List<RentDetails> rentDetails) {
         File rentDetailsCsvFile = File.createTempFile("rent_details", ".csv")
-
         rentDetailsCsvFile.with {
             rentDetailsCsvFile.write(headerLine)
             rentDetails.each { RentDetails r ->
@@ -20,26 +19,36 @@ class CsvRentDetailsWriter implements RentDetailsWriter {
 
             println("generating csv file: ${rentDetailsCsvFile.absolutePath}")
         }
+        rentDetailsCsvFile.deleteOnExit()
 
         return rentDetailsCsvFile
     }
 
     private String getHeaderLine() {
-        return h(["price", "bedrooms", "bathrooms", "parking", "address", "suburb", "state", "postcode", "latitude", "longitude"])
+        return h(["price", "bedrooms", "bathrooms", "parking", "address", "suburb", "state", "postcode", "latitude", "longitude", "daysInMarket"])
     }
 
-    private String line(RentDetails r) {
-        return [price(r),
-                bedrooms(r),
-                bathrooms(r),
-                parking(r),
-                q(address(r)),
-                q(suburb(r)),
-                q(state(r)),
-                q(postcode(r)),
-                latitude(r),
-                longitude(r)]
+    private String line(RentDetails rentDetails) {
+        return [price(rentDetails),
+                bedrooms(rentDetails),
+                bathrooms(rentDetails),
+                parking(rentDetails),
+                q(address(rentDetails)),
+                q(suburb(rentDetails)),
+                q(state(rentDetails)),
+                q(postcode(rentDetails)),
+                latitude(rentDetails),
+                longitude(rentDetails),
+                q(daysInMarket(rentDetails)),
+        ]
                 .inject { result, field -> "${result},${field}" } + newline
+    }
+
+    private String daysInMarket(RentDetails rentDetails) {
+        return rentDetails.daysInMarket.entrySet().stream()
+                .map(entry -> entry.getKey().toString() + ":" + entry.getValue().toString())
+                .reduce((a, b) -> a + "|" + b)
+                .orElse("")
     }
 
     private String price(RentDetails rentDetails) {

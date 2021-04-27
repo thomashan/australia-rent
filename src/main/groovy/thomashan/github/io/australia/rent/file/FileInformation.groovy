@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 
 @Immutable
 class FileInformation {
+    String baseDir
     String fullPath
     String fileName
     LocalDateTime modified

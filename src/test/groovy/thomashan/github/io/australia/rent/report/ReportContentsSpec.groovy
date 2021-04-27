@@ -4,6 +4,8 @@ import spock.lang.Specification
 import thomashan.github.io.australia.rent.LatLongCoordinates
 import thomashan.github.io.australia.rent.RentDetails
 
+import static java.util.Collections.emptyMap as em
+
 class ReportContentsSpec extends Specification {
     private RentDetails rentDetails1
     private RentDetails rentDetails2
@@ -13,10 +15,10 @@ class ReportContentsSpec extends Specification {
     private ReportContents reportContents2
 
     def setup() {
-        rentDetails1 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.empty())
-        rentDetails2 = new RentDetails(Optional.of(1), "anonAddress2", "anonSuburb2", "anonState2", "anonPostcode2", 0, 0, 0, Optional.empty())
-        rentDetails3 = new RentDetails(Optional.of(1), "anonAddress3", "anonSuburb3", "anonState3", "anonPostcode3", 0, 0, 0, Optional.empty())
-        rentDetails4 = new RentDetails(Optional.of(1), "anonAddress4", "anonSuburb4", "anonState4", "anonPostcode4", 0, 0, 0, Optional.empty())
+        rentDetails1 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.empty(), em())
+        rentDetails2 = new RentDetails(Optional.of(1), "anonAddress2", "anonSuburb2", "anonState2", "anonPostcode2", 0, 0, 0, Optional.empty(), em())
+        rentDetails3 = new RentDetails(Optional.of(1), "anonAddress3", "anonSuburb3", "anonState3", "anonPostcode3", 0, 0, 0, Optional.empty(), em())
+        rentDetails4 = new RentDetails(Optional.of(1), "anonAddress4", "anonSuburb4", "anonState4", "anonPostcode4", 0, 0, 0, Optional.empty(), em())
 
         reportContents1 = new ReportContents([rentDetails1, rentDetails2, rentDetails3])
         reportContents2 = new ReportContents([rentDetails2, rentDetails3, rentDetails4])
@@ -57,8 +59,8 @@ class ReportContentsSpec extends Specification {
 
     def "commonRentDetails should return rent details with coordinates"() {
         when:
-        RentDetails rentDetails1 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.of(new LatLongCoordinates(0, 0)))
-        RentDetails rentDetails2 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.empty())
+        RentDetails rentDetails1 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.of(new LatLongCoordinates(0, 0)), em())
+        RentDetails rentDetails2 = new RentDetails(Optional.of(1), "anonAddress1", "anonSuburb1", "anonState1", "anonPostcode1", 0, 0, 0, Optional.empty(), em())
         ReportContents reportContents1 = new ReportContents([rentDetails1])
         ReportContents reportContents2 = new ReportContents([rentDetails2])
         List<RentDetails> commonRentDetails1 = reportContents2.commonRentDetails(reportContents1)

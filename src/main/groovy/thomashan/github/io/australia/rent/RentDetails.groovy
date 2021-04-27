@@ -2,9 +2,14 @@ package thomashan.github.io.australia.rent
 
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.Immutable
+import groovy.transform.ImmutableBase
+import groovy.transform.ImmutableOptions
 
-@Immutable(knownImmutableClasses = [Optional], copyWith = true)
-@EqualsAndHashCode(excludes = ["coordinates"])
+
+@ImmutableBase(copyWith = true)
+@ImmutableOptions(knownImmutableClasses = [Optional])
+@Immutable
+@EqualsAndHashCode(excludes = ["coordinates", "daysInMarket"])
 class RentDetails {
     Optional<BigDecimal> price
     String address
@@ -15,4 +20,5 @@ class RentDetails {
     Integer bathrooms
     Integer parking
     Optional<LatLongCoordinates> coordinates = Optional.empty()
+    Map<DataSource, Long> daysInMarket = new EnumMap<>(DataSource)
 }

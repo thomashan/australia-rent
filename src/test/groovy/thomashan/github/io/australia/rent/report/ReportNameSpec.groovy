@@ -1,26 +1,26 @@
 package thomashan.github.io.australia.rent.report
 
 import spock.lang.Specification
-import thomashan.github.io.australia.rent.search.Search
-import thomashan.github.io.australia.rent.search.SearchQuery
+import thomashan.github.io.australia.rent.file.FileInformation
 
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-import static java.util.Optional.empty as e
-import static java.util.Optional.of
+import static thomashan.github.io.australia.rent.report.ReportType.ALL
+import static thomashan.github.io.australia.rent.report.ReportType.COMMON
 
 class ReportNameSpec extends Specification {
-    private Search search = new SearchImpl()
-    private LocalDate today = LocalDate.now()
+    private LocalDateTime now = LocalDateTime.now()
+    private LocalDate today = now.toLocalDate()
     private DateTimeFormatter f = DateTimeFormatter.BASIC_ISO_DATE
     private fileName = today.format(f)
 
     def "fullPath without suffix"() {
         when:
-        ReportName reportName = new ReportName(search, today)
+        ReportName reportName = new ReportName("/test/prices_200-400_bedrooms_2-any", today, ALL)
 
         then:
         reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}.csv"
@@ -28,15 +28,15 @@ class ReportNameSpec extends Specification {
 
     def "fullPath with suffix"() {
         when:
-        ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
+        ReportName reportName = new ReportName("/test/prices_200-400_bedrooms_2-any", today, COMMON)
 
         then:
-        reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}_suffix.csv"
+        reportName.fullPath == "/test/prices_200-400_bedrooms_2-any/${fileName}_common.csv"
     }
 
     def "fileName without suffix"() {
         when:
-        ReportName reportName = new ReportName(search, today)
+        ReportName reportName = new ReportName("/test/prices_200-400_bedrooms_2-any", today, ALL)
 
         then:
         reportName.fileName == "${fileName}.csv"
@@ -44,26 +44,10 @@ class ReportNameSpec extends Specification {
 
     def "fileName with suffix"() {
         when:
-        ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
+        ReportName reportName = new ReportName("/test/prices_200-400_bedrooms_2-any", today, COMMON)
 
         then:
-        reportName.fileName == "${fileName}_suffix.csv"
-    }
-
-    def "fileNamePattern without suffix"() {
-        when:
-        ReportName reportName = new ReportName(search, today)
-
-        then:
-        reportName.fileNamePattern == "\\d{8}\\.csv"
-    }
-
-    def "fileNamePattern with suffix"() {
-        when:
-        ReportName reportName = new ReportName(search, today, Optional.of("suffix"))
-
-        then:
-        reportName.fileNamePattern == "\\d{8}_suffix\\.csv"
+        reportName.fileName == "${fileName}_common.csv"
     }
 
     def "fileNamePattern matches exact file name"() {
@@ -85,20 +69,20 @@ class ReportNameSpec extends Specification {
         matcher.count == 0
     }
 
-    private static final class SearchImpl implements Search {
-        @Override
-        SearchQuery getSearchQuery() {
-            return new SearchQuery(e(), of(200), of(400), of(2), e())
-        }
+    def "getReportName should return correct ReportName"() {
+        when:
+        ReportName reportName1 = ReportName.getReportName(new FileInformation("/test", "/test/20000101_common.csv", "20000101_common.csv", now))
+        ReportName reportName2 = ReportName.getReportName(new FileInformation("/test", "/test/20000101.csv", "20000101.csv", now))
 
-        @Override
-        void search() {
-            throw new UnsupportedOperationException()
-        }
+        then:
+        reportName1.base == "/test"
+        reportName1.fileName == "20000101_common.csv"
+        reportName1.localDate == LocalDate.of(2000, 1, 1)
+        reportName1.suffix == Optional.of("common")
 
-        @Override
-        String getName() {
-            return "test/${[getPrices(), getBedrooms()].findAll { it }.join("_")}"
-        }
+        reportName2.base == "/test"
+        reportName2.fileName == "20000101.csv"
+        reportName2.localDate == LocalDate.of(2000, 1, 1)
+        reportName2.suffix == Optional.empty()
     }
 }

@@ -1,10 +1,14 @@
 package thomashan.github.io.australia.rent.search
 
+import thomashan.github.io.australia.rent.domain.RentDomainRepository
+import thomashan.github.io.australia.rent.file.dropbox.DropboxFileRepository
+
 import static java.util.Optional.empty as e
 
 class SearchApp {
     static void main(String[] args) {
-        new Step1(new SearchQuery(e(), getMinPrice(args), getMaxPrice(args), getMinBedrooms(args), getMaxBedrooms(args))).search()
+        new DefaultSearch(new RentDomainRepository(), new DropboxFileRepository())
+                .search(new SearchQuery(e(), getMinPrice(args), getMaxPrice(args), getMinBedrooms(args), getMaxBedrooms(args)))
     }
 
     private static Optional<Integer> getMinPrice(String[] args) {

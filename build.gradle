@@ -6,6 +6,7 @@ plugins {
 version project.VERSION
 
 apply plugin: "groovy"
+apply plugin: "java"
 apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "jacoco"
@@ -22,21 +23,22 @@ group "thomashan.github.io"
 ext {
     gebVersion = "4.1"
     seleniumVersion = "3.141.59"
-    groovyBaseVersion = "3.0.8"
-    groovyFullVersion = "2.5.14"
+    groovyBaseVersion = "3.0"
+    groovyVersion = "3.0.8"
     junitVersion = "5.7.1"
+    spockVersion = "2.0-M5"
 }
 
 dependencies {
     implementation "com.google.guava:guava:30.1.1-jre"
-    implementation("org.codehaus.groovy:groovy-all:${groovyFullVersion}") {
+    implementation("org.codehaus.groovy:groovy-all:${groovyVersion}") {
         exclude(group: "junit")
     }
     implementation "ru.yandex.qatools.ashot:ashot:1.5.4"
 
     implementation "org.gebish:geb-spock:${gebVersion}"
     implementation "org.gebish:geb-core:${gebVersion}"
-    implementation "org.spockframework:spock-core"
+    implementation "org.spockframework:spock-core:${spockVersion}-groovy-${groovyBaseVersion}"
     implementation "org.seleniumhq.selenium:selenium-support:${seleniumVersion}"
     implementation "org.seleniumhq.selenium:selenium-java:${seleniumVersion}"
     implementation "org.seleniumhq.selenium:htmlunit-driver:2.49.1"
@@ -54,8 +56,8 @@ dependencies {
 webdriverBinaries {
     configureTask(run)
     chromedriver "90.0.4430.24"
-    geckodriver "0.29.0"
-    driverUrlsConfiguration=resources.text.fromFile("webdriver/repository-3.0.json")
+    geckodriver "0.29.1"
+    driverUrlsConfiguration = resources.text.fromFile("webdriver/repository-3.0.json")
 }
 
 jacocoTestReport {
@@ -71,6 +73,7 @@ jacoco {
 }
 
 test {
+    useJUnitPlatform()
     testLogging {
         events "failed"
         exceptionFormat "full"

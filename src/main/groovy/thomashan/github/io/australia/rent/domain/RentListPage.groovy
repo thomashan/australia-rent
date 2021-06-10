@@ -12,7 +12,7 @@ class RentListPage extends Page {
 
     static content = {
         list {
-            $("ul[data-testid='results']").$("li[data-testid]").moduleList(RentListSummaryModule)
+            $("ul[data-testid='results']").$("li[data-testid^='listing'],li[data-testid^='topspot']").moduleList(RentListSummaryModule)
         }
         pageNumber { $("span[data-testid='paginator-page-button']").text() as Integer }
         pageEnd {

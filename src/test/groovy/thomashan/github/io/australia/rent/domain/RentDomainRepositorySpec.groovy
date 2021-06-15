@@ -4,13 +4,14 @@ import geb.spock.GebReportingSpec
 import thomashan.github.io.australia.rent.RentDetails
 import thomashan.github.io.australia.rent.search.SearchQuery
 
+import static java.util.Collections.emptyMap as em
 import static java.util.Optional.empty as e
 import static java.util.Optional.of
 
 class RentDomainRepositorySpec extends GebReportingSpec {
     private RentDomainRepository rentDomainRepository = new RentDomainRepository()
-    private RentDetails rentDetailsWithPrice = new RentDetails(of(200), "anonAddress", "anonSuburb", "anonState", "anonPostcode", 0, 0, 0, e())
-    private RentDetails rentDetailsWithoutPrice = new RentDetails(e(), "anonAddress", "anonSuburb", "anonState", "anonPostcode", 0, 0, 0, e())
+    private RentDetails rentDetailsWithPrice = new RentDetails(of(200), "anonAddress", "anonSuburb", "anonState", "anonPostcode", 0, 0, 0, e(), em())
+    private RentDetails rentDetailsWithoutPrice = new RentDetails(e(), "anonAddress", "anonSuburb", "anonState", "anonPostcode", 0, 0, 0, e(), em())
 
     def "get all listing for expensive listing"() {
         when:

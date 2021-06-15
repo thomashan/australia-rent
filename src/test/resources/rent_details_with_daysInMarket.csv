@@ -1,0 +1,2 @@
+price,bedrooms,bathrooms,parking,address,suburb,state,postcode,latitude,longitude,daysInMarket
+0,0,0,0,anonAddress,anonSuburb,anonState,anonPostcode,0.0,0.0,DOMAIN:1|REAL_ESTATE:2

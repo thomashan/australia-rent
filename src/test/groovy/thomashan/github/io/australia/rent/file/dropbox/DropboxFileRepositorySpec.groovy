@@ -42,5 +42,6 @@ class DropboxFileRepositorySpec extends Specification {
         then:
         !files.empty
         files[0].fullPath == fileName
+        files[0].baseDir == basePath
     }
 }
